@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống Kê Plausible</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Thống Kê Truy Cập Website</h1>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="searchText">Nội dung tìm kiếm:</label>
+                <input type="text" id="searchText" value="dk74" placeholder="Nhập text tìm kiếm">
+            </div>
+
+            <div class="control-group">
+                <label for="dateSelect">Chọn khoảng thời gian:</label>
+                <select id="dateSelect">
+                    <option value="today">Hôm nay</option>
+                    <option value="7d">1 tuần trước</option>
+                    <option value="28d">28 ngày trước</option>
+                </select>
+            </div>
+            <button id="fetchDataButton">Tải Dữ Liệu</button>
+        </div>
+
+        <div class="loading-spinner" id="loadingSpinner"></div>
+
+        <div class="total-money-display">
+            <label>Tổng tiền ước tính:</label>
+            <span id="estimatedTotalMoney">0 VNĐ</span>
+        </div>
+
+        <div class="results-table">
+            <h2>Kết Quả Chi Tiết và Tổng Hợp</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nguồn</th>
+                        <th>URL</th>
+                        <th>Unique Visitors</th>
+                        <th>Total Visits</th>
+                        <th>Total Pageviews</th>
+                        <th>Tổng tiền (page)</th> </tr>
+                </thead>
+                <tbody id="statsTableBody">
+                    </tbody>
+                <tfoot id="statsTableFoot">
+                    </tfoot>
+            </table>
+        </div>
+
+        <div class="source-config">
+            <h2>Cấu Hình Nguồn Dữ Liệu</h2>
+            <div id="sourceInputs">
+                </div>
+            <button id="addSourceButton">Thêm nguồn</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
