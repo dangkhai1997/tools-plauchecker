@@ -1,11 +1,11 @@
-/* General Body Styles */
+/* style.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f7f6;
     color: #333;
-    line-height: 1.6;
 }
 
 .container {
@@ -14,7 +14,7 @@ body {
     background-color: #ffffff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
@@ -23,18 +23,16 @@ h1, h2 {
     margin-bottom: 25px;
 }
 
-/* Controls Section */
 .controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 30px;
-    align-items: flex-end;
-    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
     padding: 15px;
     background-color: #ecf0f1;
     border-radius: 6px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .control-group {
@@ -43,19 +41,19 @@ h1, h2 {
 }
 
 .controls label {
+    margin-bottom: 5px;
     font-weight: bold;
-    margin-bottom: 8px;
-    color: #34495e;
+    color: #555;
 }
 
 .controls input[type="text"],
 .controls select {
-    padding: 10px 12px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
-    width: 200px; /* Adjusted for consistency */
-    box-sizing: border-box;
+    width: 200px;
+    box-sizing: border-box; /* Ensures padding doesn't add to the width */
 }
 
 .controls button {
@@ -66,14 +64,13 @@ h1, h2 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
 .controls button:hover {
     background-color: #2980b9;
 }
 
-/* Loading Spinner */
 .loading-spinner {
     border: 4px solid #f3f3f3;
     border-top: 4px solid #3498db;
@@ -90,272 +87,274 @@ h1, h2 {
     100% { transform: rotate(360deg); }
 }
 
-/* Total Money Display */
 .total-money-display {
     text-align: center;
-    margin-bottom: 30px; /* Khoảng cách với bảng bên dưới */
-    padding: 20px;
-    background-color: #e0f2f7; /* Nền nhẹ nhàng */
-    border-radius: 8px;
-    border: 2px solid #3498db; /* Viền nổi bật */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.total-money-display label {
-    font-size: 1.5em; /* To hơn một chút */
-    font-weight: bold;
-    color: #2c3e50;
-    display: block; /* Đảm bảo label chiếm một dòng */
-    margin-bottom: 10px;
-}
-
-.total-money-display #estimatedTotalMoney {
-    font-size: 2.5em; /* Rất bự và nổi bật */
-    font-weight: bolder; /* Nhấn mạnh hơn nữa */
-    color: #e74c3c; /* Màu đỏ nổi bật */
-    display: block; /* Chiếm một dòng riêng */
-    letter-spacing: 1px; /* Thêm khoảng cách chữ */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
-}
-
-
-/* Results Table */
-.results-table {
-    overflow-x: auto; /* Bảng sẽ cuộn ngang nếu nội dung quá rộng */
-}
-
-.results-table table {
-    width: 100%;
-    min-width: 600px; /* Đảm bảo bảng không quá nhỏ trên mobile */
-    border-collapse: collapse;
     margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    padding: 15px;
+    background-color: #e8f5e9; /* Light green for positive total */
+    border-radius: 6px;
+    font-size: 1.2em; /* Giữ kích thước label */
+    font-weight: bold;
+    color: #28a745;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex; /* Dùng flexbox để căn chỉnh label và span */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: baseline; /* Căn chỉnh các mục theo đường cơ sở của text */
+    gap: 10px; /* Khoảng cách giữa label và số tiền */
 }
 
-.results-table th,
-.results-table td {
-    border: 1px solid #ddd;
+/* NEW: Style for the estimated total money amount */
+#estimatedTotalMoney {
+    font-size: 1.8em; /* Tăng kích thước font */
+    color: #1a7d32; /* Đậm hơn một chút */
+    font-weight: bold;
+    white-space: nowrap; /* Ngăn không cho số tiền bị xuống dòng */
+}
+
+
+.results-table,
+.post-details-table {
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Ensures rounded corners apply to content */
+}
+
+th, td {
     padding: 12px 15px;
     text-align: left;
-    white-space: nowrap; /* Ngăn không cho nội dung trong ô bị ngắt dòng */
+    border-bottom: 1px solid #ddd;
 }
 
-.results-table th {
-    background-color: #3498db;
-    color: white;
+th {
+    background-color: #f2f2f2;
+    color: #333;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 0.9em;
 }
 
-.results-table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-.results-table tbody tr:hover {
-    background-color: #e9f7ef;
+tr:hover {
+    background-color: #f1f1f1;
 }
 
-.results-table td a {
+td a {
     color: #3498db;
     text-decoration: none;
-    word-break: break-all; /* Cho phép URL dài tự động ngắt dòng */
-    white-space: normal; /* Cho phép ngắt dòng cho URL */
-    display: block; /* Để link chiếm toàn bộ chiều rộng ô */
 }
 
-.results-table td a:hover {
+td a:hover {
     text-decoration: underline;
 }
 
-.results-table tfoot td {
+tfoot td {
     font-weight: bold;
-    background-color: #ecf0f1;
-    border-top: 2px solid #ccc;
+    background-color: #e0e0e0;
+    border-top: 2px solid #bbb;
 }
 
-/* Source Configuration Section */
 .source-config {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px dashed #ccc;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .source-config h2 {
-    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 15px;
 }
 
-#sourceInputs {
+/* Updated: Styles for the common headers for source inputs */
+.source-headers {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.source-input-group {
-    background-color: #fdfdfd;
-    border: 1px solid #e0e0e0;
-    padding: 15px;
-    border-radius: 6px;
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 10px;
-    align-items: center;
-}
-
-.source-input-group label {
+    /* Dùng grid để căn chỉnh chính xác hơn với các input */
+    display: grid;
+    /* Cột 1 cho Tên nguồn, Cột 2 cho URL nguồn, Cột 3 cho các nút (có thể để trống) */
+    grid-template-columns: minmax(150px, 1.2fr) minmax(200px, 2fr) auto auto auto auto;
+    gap: 10px; /* Khoảng cách giữa các cột */
+    padding: 0 10px; /* Match padding of source-input-group */
+    margin-bottom: 10px; /* Space between headers and first input */
     font-weight: bold;
     color: #555;
-    flex-basis: 100%; /* Label takes full width on its own line */
-    margin-bottom: 5px;
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.source-headers span {
+    white-space: nowrap; /* Ngăn không cho header bị xuống dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.source-input-group {
+    display: grid; /* Dùng grid để căn chỉnh */
+    grid-template-columns: minmax(150px, 1.2fr) minmax(200px, 2fr) auto auto auto auto; /* Match source-headers */
+    gap: 10px; /* Khoảng cách giữa các cột */
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #cdd;
+    border-radius: 5px;
+    background-color: #fdfefe;
+    align-items: center; /* Căn giữa theo chiều dọc */
 }
 
 .source-input-group input[type="text"] {
-    flex: 1; /* Allow inputs to grow */
-    padding: 8px 10px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 0.95em;
-    box-sizing: border-box;
-    min-width: 150px; /* Minimum width for inputs */
+    width: 100%; /* Đảm bảo input chiếm hết chiều rộng cột */
+    box-sizing: border-box; /* Tính cả padding vào width */
 }
 
+/* Removed flex-basis and max-width for inputs, let grid handle it */
+/* .source-input-group .source-name-input { ... } */
+/* .source-input-group .source-url-input { ... } */
+
+
 .source-input-group button {
-    padding: 8px 15px;
-    background-color: #e74c3c;
-    color: white;
+    padding: 8px 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
 }
 
-.source-input-group button:hover {
+.remove-source-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.remove-source-button:hover {
     background-color: #c0392b;
 }
 
-#addSourceButton {
-    padding: 10px 20px;
+.view-details-button {
     background-color: #2ecc71;
     color: white;
+}
+
+.view-details-button:hover {
+    background-color: #27ae60;
+}
+
+#addSourceButton {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s ease;
-    display: block; /* Make it a block element */
-    width: fit-content; /* Fit content width */
-    margin: 20px auto 0; /* Center it */
+    margin-top: 10px;
 }
 
 #addSourceButton:hover {
-    background-color: #27ae60;
+    background-color: #2980b9;
 }
 
-/* Responsive Adjustments for Mobile Phones */
+.post-details-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.post-details-section h2 {
+    text-align: left;
+}
+
+/* Style cho các nút xem chi tiết */
+.view-plau-button {
+    background-color: #007bff; /* Màu xanh dương cho Plausible */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    /* margin-left: 5px; Xóa margin-left để grid tự sắp xếp */
+    transition: background-color 0.2s ease;
+}
+
+.view-plau-button:hover {
+    background-color: #0056b3;
+}
+
+.view-wp-button {
+    background-color: #ff9800; /* Màu cam cho WordPress */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    /* margin-left: 5px; Xóa margin-left để grid tự sắp xếp */
+    transition: background-color 0.2s ease;
+}
+
+.view-wp-button:hover {
+    background-color: #e68a00;
+}
+
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    body {
-        padding: 10px; /* Giảm padding tổng thể */
-    }
-
-    .container {
-        padding: 15px; /* Giảm padding container */
-        margin: 10px auto;
-    }
-
-    h1, h2 {
-        font-size: 1.8em; /* Giảm kích thước tiêu đề */
-        margin-bottom: 15px;
-    }
-
-    /* Controls Section on mobile */
     .controls {
-        flex-direction: column; /* Xếp các phần tử theo cột */
-        align-items: stretch; /* Kéo dài các phần tử để chiếm toàn bộ chiều rộng */
-        gap: 15px; /* Giảm khoảng cách giữa các control group */
-        padding: 10px;
-    }
-
-    .controls input[type="text"],
-    .controls select,
-    .controls button {
-        width: 100%; /* Chiếm toàn bộ chiều rộng */
-        box-sizing: border-box; /* Đảm bảo padding không làm tràn ra ngoài */
-        margin-bottom: 0; /* Loại bỏ margin-bottom cũ */
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .control-group {
-        width: 100%; /* Đảm bảo mỗi nhóm control chiếm toàn bộ chiều rộng */
-        margin-bottom: 0; /* Loại bỏ margin-bottom không cần thiết */
-    }
-
-    /* Total Money Display on mobile */
-    .total-money-display {
-        padding: 15px;
-        margin-bottom: 20px;
-    }
-
-    .total-money-display label {
-        font-size: 1.2em; /* Giảm kích thước label */
-        margin-bottom: 5px;
-    }
-
-    .total-money-display #estimatedTotalMoney {
-        font-size: 2em; /* Giảm kích thước số tiền */
-    }
-
-    /* Results Table on mobile */
-    .results-table table {
-        min-width: unset; /* Bỏ min-width để bảng có thể co giãn nhỏ hơn */
         width: 100%;
     }
 
-    .results-table th,
-    .results-table td {
-        padding: 8px 10px; /* Giảm padding ô bảng */
-        font-size: 0.8em; /* Giảm kích thước font trong bảng */
+    .controls input[type="text"],
+    .controls select {
+        width: 100%;
     }
 
-    /* Đảm bảo URL trong cột "URL" vẫn hiển thị tốt */
-    .results-table td a {
-        word-break: break-all;
-        white-space: normal;
-    }
-
-    /* Source Configuration on mobile */
+    /* Responsive cho source-headers và source-input-group */
+    .source-headers,
     .source-input-group {
-        flex-direction: column; /* Xếp các input nguồn theo cột */
-        align-items: stretch;
-        padding: 10px;
-        gap: 8px; /* Giảm khoảng cách giữa các input */
+        grid-template-columns: 1fr; /* Một cột duy nhất trên màn hình nhỏ */
+        gap: 5px; /* Giảm khoảng cách */
     }
 
-    .source-input-group label {
-        margin-bottom: 0; /* Loại bỏ margin-bottom */
+    .source-headers span {
+        width: 100%;
+        margin-bottom: 0; /* Remove margin-bottom */
+        text-align: left;
     }
 
-    .source-input-group input[type="text"],
+
+    .source-input-group input[type="text"] {
+        width: 100%;
+        max-width: none; /* Remove max-width on small screens */
+        min-width: unset;
+    }
+
     .source-input-group button {
-        width: 100%; /* Chiếm toàn bộ chiều rộng */
-        min-width: unset; /* Bỏ min-width */
-        box-sizing: border-box;
-    }
-
-    #addSourceButton {
-        width: 100%; /* Nút thêm nguồn chiếm toàn bộ chiều rộng */
+        width: 100%;
         margin-left: 0;
-        margin-right: 0;
-    }
-}
-
-/* Optional: Additional media query for very small screens if needed */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5em;
-    }
-    h2 {
-        font-size: 1.3em;
+        margin-top: 5px;
     }
 }

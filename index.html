@@ -44,20 +44,46 @@
                         <th>Unique Visitors</th>
                         <th>Total Visits</th>
                         <th>Total Pageviews</th>
-                        <th>Tổng tiền (page)</th> </tr>
+                        <th>Tổng tiền (page)</th>
+                    </tr>
                 </thead>
                 <tbody id="statsTableBody">
-                    </tbody>
+                </tbody>
                 <tfoot id="statsTableFoot">
-                    </tfoot>
+                </tfoot>
             </table>
         </div>
 
         <div class="source-config">
             <h2>Cấu Hình Nguồn Dữ Liệu</h2>
-            <div id="sourceInputs">
+            <div class="source-headers">
+                <span>Tên nguồn</span>
+                <span>URL nguồn (Plausible Share)</span>
                 </div>
+            <div id="sourceInputs">
+            </div>
             <button id="addSourceButton">Thêm nguồn</button>
+        </div>
+
+        <div class="post-details-section" id="postDetailsSection" style="display: none;">
+            <h2>Chi Tiết Bài Viết</h2>
+            <p id="postDetailsSourceTitle"></p>
+            <div class="loading-spinner" id="postDetailsLoadingSpinner"></div>
+            <div class="post-details-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tiêu đề</th>
+                            <th>URL (Path)</th>
+                            <th>Tác giả</th>
+                            <th>Ngày đăng</th>
+                            <th>Lượt View</th>
+                        </tr>
+                    </thead>
+                    <tbody id="postDetailsTableBody">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>
