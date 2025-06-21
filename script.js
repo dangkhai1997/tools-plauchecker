@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let baseUrl;
         try {
             baseUrl = `https://${sourceHostname}/wp-json/wp/v2/posts?_embed=author`;
-            baseUrl += `&per_page=10`; // Lấy 10 bài viết. Có thể tăng lên 100 nếu cần
+            baseUrl += `&per_page=100`; // Lấy 10 bài viết. Có thể tăng lên 100 nếu cần
 
             const dateParams = getWordPressDateParams(dateSelect.value);
             baseUrl += `&after=${dateParams.after}&before=${dateParams.before}`;
