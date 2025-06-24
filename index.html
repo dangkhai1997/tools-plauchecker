@@ -70,15 +70,18 @@
             <p id="postDetailsSourceTitle"></p>
             <div class="loading-spinner" id="postDetailsLoadingSpinner"></div>
             <div class="post-details-table">
-                <table>
+                <table id="postDetailsTable">
                     <thead>
                         <tr>
                             <th>Tiêu đề</th>
-                            <th>URL (Path)</th>
                             <th>Tác giả</th>
-                            <th>Ngày đăng</th>
-                            <th>Lượt View</th>
-                        </tr>
+                            <th class="sortable" data-sort-key="date">
+                                Ngày đăng <span class="sort-icon"></span>
+                            </th>
+                            <th class="sortable" data-sort-key="views">
+                                Lượt View <span class="sort-icon"></span>
+                            </th>
+                            <th>Link</th> </tr>
                     </thead>
                     <tbody id="postDetailsTableBody">
                     </tbody>

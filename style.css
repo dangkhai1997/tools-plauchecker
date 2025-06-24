@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px; /* Tăng độ rộng tối đa của web */
     margin: 20px auto;
     background-color: #ffffff;
     padding: 30px;
@@ -114,7 +114,7 @@ h1, h2 {
 
 .results-table,
 .post-details-table {
-    overflow-x: auto;
+    overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung quá rộng */
     margin-bottom: 30px;
 }
 
@@ -164,6 +164,49 @@ tfoot td {
     background-color: #e0e0e0;
     border-top: 2px solid #bbb;
 }
+
+/* --- Sorting styles --- */
+.sortable {
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px; /* Tạo không gian cho icon */
+    white-space: nowrap; /* Giữ tiêu đề trên một dòng */
+}
+
+.sort-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #aaa; /* Mũi tên lên mặc định (trạng thái ban đầu hoặc chưa được sort) */
+    opacity: 0.6; /* Mờ khi không được chọn */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Icon lên khi sắp xếp TĂNG DẦN */
+.sort-icon.sort-asc {
+    border-top: none;
+    border-bottom: 5px solid #333; /* Mũi tên lên */
+    opacity: 1; /* Rõ khi được chọn */
+}
+
+/* Icon xuống khi sắp xếp GIẢM DẦN */
+.sort-icon.sort-desc {
+    border-bottom: none;
+    border-top: 5px solid #333; /* Mũi tên xuống */
+    opacity: 1; /* Rõ khi được chọn */
+}
+
+.sortable:hover .sort-icon {
+    opacity: 0.8; /* Rõ hơn khi hover */
+}
+/* --- End Sorting styles --- */
+
 
 .source-config {
     margin-top: 30px;
@@ -304,6 +347,43 @@ tfoot td {
     background-color: #e68a00;
 }
 
+/* Cải thiện style cho nút Open Link */
+.open-link-button {
+    display: inline-block; /* Để có thể thiết lập padding, margin, width */
+    padding: 8px 12px; /* Tăng padding */
+    background-color: #28a745; /* Màu xanh lá cây đẹp hơn */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bo góc nhẹ */
+    cursor: pointer;
+    font-size: 0.9em; /* Kích thước font vừa phải */
+    font-weight: bold; /* Chữ đậm hơn */
+    text-align: center;
+    text-decoration: none; /* Đảm bảo không có gạch chân nếu là thẻ <a> */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Thêm hiệu ứng transform */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Thêm đổ bóng */
+    white-space: nowrap; /* Giữ nút trên một dòng */
+}
+
+.open-link-button:hover {
+    background-color: #218838; /* Màu xanh đậm hơn khi hover */
+    transform: translateY(-1px); /* Nâng nhẹ nút lên */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng khi hover */
+}
+
+.open-link-button:active {
+    transform: translateY(0); /* Nút lún xuống khi click */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Column widths for post-details-table to accommodate the new order and button */
+.post-details-table th:nth-child(1) { width: 35%; } /* Tiêu đề - tăng width */
+.post-details-table th:nth-child(2) { width: 15%; } /* Tác giả */
+.post-details-table th:nth-child(3) { width: 15%; } /* Ngày đăng */
+.post-details-table th:nth-child(4) { width: 10%; } /* Lượt View */
+.post-details-table th:nth-child(5) { width: 15%; } /* Link (nút) - đủ chỗ cho nút */
+
 
 /* Responsive adjustments for mobile devices */
 @media (max-width: 768px) {
@@ -313,6 +393,7 @@ tfoot td {
 
     .container {
         padding: 20px; /* Giảm padding container */
+        max-width: 100%; /* Đảm bảo full width trên di động */
     }
 
     h1, h2 {
@@ -391,6 +472,42 @@ tfoot td {
     table th, table td {
         padding: 8px 10px; /* Giảm padding cho ô bảng */
     }
+
+    /* Đảm bảo icon sort không bị tràn */
+    .sortable {
+        padding-right: 15px; /* Giảm khoảng trống cho icon trên màn hình nhỏ */
+    }
+    .sort-icon {
+        right: 2px; /* Điều chỉnh vị trí icon */
+    }
+
+    /* Điều chỉnh kích thước và font của nút Open Link trên điện thoại */
+    .open-link-button {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+
+    /* Đảm bảo các cột trong bảng chi tiết bài viết cũng responsive */
+    .post-details-table th:nth-child(1),
+    .post-details-table td:nth-child(1) {
+        width: 30%; /* Có thể giảm nhẹ chiều rộng tiêu đề trên mobile */
+    }
+    .post-details-table th:nth-child(2),
+    .post-details-table td:nth-child(2) {
+        width: 15%; /* Tác giả */
+    }
+    .post-details-table th:nth-child(3),
+    .post-details-table td:nth-child(3) {
+        width: 20%; /* Ngày đăng, cần đủ chỗ cho HH:MM DD/MM */
+    }
+    .post-details-table th:nth-child(4),
+    .post-details-table td:nth-child(4) {
+        width: 15%; /* Lượt View */
+    }
+    .post-details-table th:nth-child(5),
+    .post-details-table td:nth-child(5) {
+        width: 20%; /* Link (nút), cần đủ chỗ cho nút */
+    }
 }
 
 /* Responsive cho màn hình rất nhỏ (dưới 480px) */
@@ -400,5 +517,15 @@ tfoot td {
     }
     .container {
         padding: 15px;
+    }
+    .post-details-table th,
+    .post-details-table td {
+        white-space: normal; /* Cho phép nội dung trong ô xuống dòng */
+    }
+    .post-details-table th:nth-child(1),
+    .post-details-table td:nth-child(1) {
+        max-width: 120px; /* Giới hạn chiều rộng của cột tiêu đề */
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

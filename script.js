@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const postDetailsSourceTitle = document.getElementById('postDetailsSourceTitle');
     const postDetailsLoadingSpinner = document.getElementById('postDetailsLoadingSpinner');
     const postDetailsTableBody = document.getElementById('postDetailsTableBody');
+    const postDetailsTable = document.getElementById('postDetailsTable'); // Lấy bảng để gắn sự kiện sort
 
     // Đơn giá: 30,000 VNĐ cho mỗi 1000 Unique Visitors
     const PRICE_PER_1000_VIEWS = 30000;
@@ -25,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=Kpt3fmlZ0T_2kERnRcCQW" },
         { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=JfL7e0Vt5SeDsfKFocR7s" }
     ];
+
+    // Biến toàn cục để lưu trữ dữ liệu bài viết đang hiển thị và trạng thái sắp xếp
+    let currentPostsData = [];
+    // Mặc định sắp xếp theo lượt view giảm dần khi mới vào trang hoặc tải lại dữ liệu chính
+    let currentSortColumn = 'views';
+    let currentSortDirection = 'desc';
 
     /**
      * Trích xuất domain và auth token từ URL chia sẻ của Plausible.
@@ -64,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function buildPlausibleApiUrl(domain, auth, text, period) {
         const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        const formattedDate = `${yyyy}-${mm}-${dd}`;
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
 
         let periodParam = '';
         if (period === '28d') {
@@ -103,19 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Nếu là 'today', startDate và endDate vẫn là hôm nay
 
         const formatToWPDate = (date) => {
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, '0');
-            const dd = String(date.getDate()).padStart(2, '0');
-            return `${yyyy}-${mm}-${dd}`;
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         };
 
         const afterDateString = formatToWPDate(startDate);
         const beforeDateString = formatToWPDate(endDate);
 
         return {
-            after: `${afterDateString}T00:00:00`, // Cho WordPress: YYYY-MM-DDTHH:MM:SS
-            before: `${beforeDateString}T23:59:59`, // Cho WordPress: YYYY-MM-DDTHH:MM:SS
-            // Cho Plausible pages API: YYYY-MM-DD hoặc YYYY-MM-DD,YYYY-MM-DD
+            after: `${afterDateString}T00:00:00`, // Cho WordPress:YYYY-MM-DDTHH:MM:SS
+            before: `${beforeDateString}T23:59:59`, // Cho WordPress:YYYY-MM-DDTHH:MM:SS
+            // Cho Plausible pages API:YYYY-MM-DD hoặc YYYY-MM-DD,YYYY-MM-DD
             plausibleDate: `${afterDateString}${period === 'today' ? '' : `,${beforeDateString}`}`,
             plausiblePeriod: period === 'today' ? 'day' : (period === '7d' ? '7d' : '28d')
         };
@@ -130,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let baseUrl;
         try {
             baseUrl = `https://${sourceHostname}/wp-json/wp/v2/posts?_embed=author`;
-            baseUrl += `&per_page=100`; // Lấy 10 bài viết. Có thể tăng lên 100 nếu cần
+            baseUrl += `&per_page=100`; // Lấy 100 bài viết.
 
             const dateParams = getWordPressDateParams(dateSelect.value);
             baseUrl += `&after=${dateParams.after}&before=${dateParams.before}`;
@@ -156,11 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (urlError) {
                     console.warn(`Could not parse post link for path: ${post.link}, Error: ${urlError}`);
                 }
+
+                // Chuyển đổi sang đối tượng Date để định dạng
+                const postDate = new Date(post.date);
+
+                // Định dạng hiển thị giờ:phút ngày/tháng (bỏ năm)
+                const formattedTime = postDate.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false });
+                const formattedDate = postDate.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' }); // Bỏ 'year'
+
                 return {
                     title: post.title.rendered,
                     author: post._embedded && post._embedded.author && post._embedded.author[0] ? post._embedded.author[0].name : 'Không rõ',
-                    date: new Date(post.date).toLocaleDateString('vi-VN'),
-                    link: post.link,
+                    // Lưu trữ ngày đăng ở định dạng ISO để dễ dàng sắp xếp
+                    dateISO: post.date,
+                    // Định dạng hiển thị: HH:MM DD/MM
+                    dateFormatted: `${formattedTime} ${formattedDate}`,
+                    link: post.link, // Giữ nguyên link đầy đủ
                     path: postPath // Trích xuất và lưu trữ path từ link của bài viết
                 };
             });
@@ -207,6 +225,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
+     * Render dữ liệu bài viết vào bảng chi tiết.
+     * @param {Array<object>} posts - Mảng các đối tượng bài viết đã có lượt view.
+     */
+    function renderPostDetailsTable(posts) {
+        postDetailsTableBody.innerHTML = ''; // Xóa nội dung cũ
+
+        if (posts.length === 0) {
+            postDetailsTableBody.innerHTML = `<tr><td colspan="5">Không tìm thấy bài viết nào trong khoảng thời gian đã chọn hoặc không thể kết nối đến WordPress API.</td></tr>`;
+            return;
+        }
+
+        posts.forEach(post => {
+            const tr = document.createElement('tr');
+            const viewsFormatted = typeof post.views === 'number' ? post.views.toLocaleString('vi-VN') : 'N/A';
+
+            tr.innerHTML = `
+                <td>${post.title}</td>
+                <td>${post.author}</td>
+                <td>${post.dateFormatted}</td>
+                <td>${viewsFormatted}</td>
+                <td><button class="open-link-button" data-link="${post.link}">Open Link</button></td>`; // Nút "Open Link" cuối cùng
+            postDetailsTableBody.appendChild(tr);
+        });
+
+        // Gắn sự kiện cho các nút "Open Link"
+        document.querySelectorAll('.open-link-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const link = event.target.dataset.link;
+                if (link) {
+                    window.open(link, '_blank');
+                }
+            });
+        });
+    }
+
+    /**
      * Hiển thị chi tiết bài viết và lượt view trong bảng.
      * @param {string} sourceName - Tên hiển thị của nguồn.
      * @param {string} sourceHostname - Hostname của trang WordPress.
@@ -216,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         postDetailsSection.style.display = 'block';
         postDetailsSourceTitle.textContent = `Bài viết từ: ${sourceName} (${sourceHostname})`;
         postDetailsLoadingSpinner.style.display = 'block';
-        postDetailsTableBody.innerHTML = '';
+        postDetailsTableBody.innerHTML = ''; // Xóa nội dung cũ trước khi tải
 
         const domainAndAuth = extractDomainAndAuth(sourceUrlFull);
         if (!domainAndAuth || !domainAndAuth.domain || !domainAndAuth.auth) {
@@ -237,13 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         postDetailsLoadingSpinner.style.display = 'none';
 
-        if (posts.length === 0) {
-            postDetailsTableBody.innerHTML = `<tr><td colspan="5">Không tìm thấy bài viết nào trong khoảng thời gian đã chọn hoặc không thể kết nối đến WordPress API. Vui lòng kiểm tra console để biết chi tiết lỗi (có thể do CORS).</td></tr>`;
-            return;
-        }
-
-        // Tạo một mảng mới chứa thông tin bài viết kèm lượt view để dễ dàng sắp xếp
-        const postsWithViews = posts.map(post => {
+        // Tạo một mảng mới chứa thông tin bài viết kèm lượt view
+        currentPostsData = posts.map(post => {
             const views = pageViewsMap.get(post.path) || 0;
             return {
                 ...post,
@@ -251,22 +300,74 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
 
-        // Sắp xếp mảng postsWithViews theo lượt views giảm dần
-        postsWithViews.sort((a, b) => b.views - a.views);
+        // Sắp xếp mặc định theo lượt view giảm dần và render
+        sortPosts(currentSortColumn, currentSortDirection);
+    }
 
-        postsWithViews.forEach(post => {
-            const tr = document.createElement('tr');
-            const viewsFormatted = typeof post.views === 'number' ? post.views.toLocaleString('vi-VN') : 'N/A';
+    /**
+     * Hàm sắp xếp dữ liệu bài viết và render lại bảng.
+     * @param {string} column - Cột cần sắp xếp ('date' hoặc 'views').
+     * @param {string} direction - Hướng sắp xếp ('asc' hoặc 'desc').
+     */
+    function sortPosts(column, direction) {
+        currentSortColumn = column;
+        currentSortDirection = direction;
 
-            tr.innerHTML = `
-                <td>${post.title}</td>
-                <td><a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.path}</a></td>
-                <td>${post.author}</td>
-                <td>${post.date}</td>
-                <td>${viewsFormatted}</td> `; // Giữ nguyên 5 cột
-            postDetailsTableBody.appendChild(tr);
+        if (column === 'views') {
+            currentPostsData.sort((a, b) => {
+                const valA = typeof a.views === 'number' ? a.views : 0;
+                const valB = typeof b.views === 'number' ? b.views : 0;
+                return direction === 'asc' ? valA - valB : valB - valA;
+            });
+        } else if (column === 'date') {
+            currentPostsData.sort((a, b) => {
+                const dateA = new Date(a.dateISO).getTime();
+                const dateB = new Date(b.dateISO).getTime();
+                return direction === 'asc' ? dateA - dateB : dateB - dateA;
+            });
+        }
+        renderPostDetailsTable(currentPostsData);
+        updateSortIcons();
+    }
+
+    /**
+     * Cập nhật biểu tượng sắp xếp trên header của bảng.
+     */
+    function updateSortIcons() {
+        document.querySelectorAll('.sortable').forEach(th => {
+            const sortIcon = th.querySelector('.sort-icon');
+            if (sortIcon) {
+                // Xóa tất cả các lớp icon cũ
+                sortIcon.classList.remove('sort-asc', 'sort-desc');
+
+                // Thêm lớp icon mới nếu cột này đang được sắp xếp
+                if (th.dataset.sortKey === currentSortColumn) {
+                    sortIcon.classList.add(`sort-${currentSortDirection}`);
+                }
+            }
         });
     }
+
+    // Gắn sự kiện click cho các header có thể sắp xếp
+    postDetailsTable.addEventListener('click', (event) => {
+        const target = event.target.closest('th.sortable');
+        if (target) {
+            const column = target.dataset.sortKey;
+            let direction = 'asc';
+
+            if (column === currentSortColumn) {
+                // Đảo ngược hướng nếu click lại cùng cột
+                direction = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else if (column === 'views') {
+                // Mặc định lượt view là giảm dần khi chuyển cột
+                direction = 'desc';
+            } else if (column === 'date') {
+                // Mặc định ngày đăng là giảm dần (mới nhất trước) khi chuyển cột
+                direction = 'desc';
+            }
+            sortPosts(column, direction);
+        }
+    });
 
     /**
      * Render và quản lý các trường input cho nguồn dữ liệu.
@@ -303,7 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const source = sourceUrls[indexToView];
                 const domainAndAuth = extractDomainAndAuth(source.url);
                 if (domainAndAuth && domainAndAuth.hostname) {
-                    // Truyền thêm source.url đầy đủ để lấy lại domain và auth cho Plausible API
                     displayPostDetails(source.name, domainAndAuth.hostname, source.url);
                 } else {
                     alert('Không thể lấy hostname hoặc thông tin xác thực từ URL nguồn này để xem chi tiết bài viết. Vui lòng đảm bảo URL Plausible Share hợp lệ.');
@@ -457,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${uniqueVisitorsValue}</td>
                     <td>${totalVisitsValue}</td>
                     <td>${totalPageviewsValue}</td>
-                    <td>${pageEstimatedMoney}</td> `;
+                    <td>${pageEstimatedMoney}</td>`;
                 statsTableBody.appendChild(tr);
 
                 if (typeof result.uniqueVisitors === 'number') grandTotalUV += result.uniqueVisitors;
@@ -496,6 +596,10 @@ document.addEventListener('DOMContentLoaded', () => {
     dateSelect.addEventListener('change', () => {
         fetchAndDisplayData();
         postDetailsSection.style.display = 'none'; // Ẩn bảng chi tiết khi thay đổi khoảng thời gian
+        // Đặt lại trạng thái sắp xếp mặc định khi thay đổi khoảng thời gian
+        currentSortColumn = 'views';
+        currentSortDirection = 'desc';
+        updateSortIcons(); // Cập nhật icon sau khi reset
     });
     fetchDataButton.addEventListener('click', fetchAndDisplayData);
 
