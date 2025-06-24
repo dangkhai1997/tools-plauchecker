@@ -245,11 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${post.author}</td>
                 <td>${post.dateFormatted}</td>
                 <td>${viewsFormatted}</td>
-                <td><button class="open-link-button" data-link="${post.link}">Open Link</button></td>`; // Nút "Open Link" cuối cùng
+                <td><a href="${post.link}" target="_blank" rel="noopener noreferrer" class="open-link-button">Open Link</a></td>`; // <-- Đã thay đổi thành thẻ <a>
             postDetailsTableBody.appendChild(tr);
         });
 
-        // Gắn sự kiện cho các nút "Open Link"
+        // Bỏ phần này đi vì không còn nút để gắn sự kiện nữa
+        /*
         document.querySelectorAll('.open-link-button').forEach(button => {
             button.addEventListener('click', (event) => {
                 const link = event.target.dataset.link;
@@ -258,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+        */
     }
 
     /**
@@ -316,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (column === 'views') {
             currentPostsData.sort((a, b) => {
                 const valA = typeof a.views === 'number' ? a.views : 0;
-                const valB = typeof b.views === 'number' ? b.views : 0;
+                const valB = typeof b.views === 'number' ? b.views : 0; // Fixed: Corrected valB initialization
                 return direction === 'asc' ? valA - valB : valB - valA;
             });
         } else if (column === 'date') {

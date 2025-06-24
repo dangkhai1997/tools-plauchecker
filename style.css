@@ -347,7 +347,7 @@ tfoot td {
     background-color: #e68a00;
 }
 
-/* Cải thiện style cho nút Open Link */
+/* Cải thiện style cho nút Open Link (bây giờ áp dụng cho thẻ <a>) */
 .open-link-button {
     display: inline-block; /* Để có thể thiết lập padding, margin, width */
     padding: 8px 12px; /* Tăng padding */
@@ -359,7 +359,7 @@ tfoot td {
     font-size: 0.9em; /* Kích thước font vừa phải */
     font-weight: bold; /* Chữ đậm hơn */
     text-align: center;
-    text-decoration: none; /* Đảm bảo không có gạch chân nếu là thẻ <a> */
+    text-decoration: none; /* RẤT QUAN TRỌNG: Bỏ gạch chân mặc định của thẻ <a> */
     transition: background-color 0.2s ease, transform 0.1s ease; /* Thêm hiệu ứng transform */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Thêm đổ bóng */
     white-space: nowrap; /* Giữ nút trên một dòng */
