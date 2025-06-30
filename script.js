@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mảng chứa các URL gốc (tên miền và auth token) và tên hiển thị tương ứng
     let sourceUrls = [
-        { name: "Kadis", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=1AYYP7u2cZzoWV7-qJEan" },
-        { name: "Seven", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=sBOQdfq1Nes5jOpUf4VDm" },
-        { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=Kpt3fmlZ0T_2kERnRcCQW" },
-        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=JfL7e0Vt5SeDsfKFocR7s" }
+        { name: "Kadis", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=nFKWzNxxWGqfMdNmZKUTS" },
+        { name: "Seven", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=a9r3yiCPofPziG3udopEa" },
+        { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=LCEgLgZwsRfw07yVcjs1u" },
+        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=TGB6NAxXH3bSntulkz1Uz" }
     ];
 
     // Biến toàn cục để lưu trữ dữ liệu bài viết đang hiển thị và trạng thái sắp xếp
