@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let sourceUrls = [
         { name: "Kadis", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=nFKWzNxxWGqfMdNmZKUTS" },
         { name: "Seven", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=a9r3yiCPofPziG3udopEa" },
-        { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=LCEgLgZwsRfw07yVcjs1u" },
+        { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=2IeNrFaEqCc_HWoOeKBF-" },
         { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=TGB6NAxXH3bSntulkz1Uz" }
     ];
 
