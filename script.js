@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Kadis", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=PaqjHTd5ougbKvf6xqqSp" },
         { name: "Seven", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=88OeC8D9rkNyPm_ytzMo9" },
         { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=V9aSX0TDQ9PEz-LDOXN9A" },
-        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lx0fI1jLk6OG8Cj8MkgNi" }
+        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lx0fI1jLk6OG8Cj8MkgNi" },
+        { name: "Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=xyz" } // Đã thêm trang Đức
     ];
 
     // Biến toàn cục để lưu trữ dữ liệu bài viết đang hiển thị và trạng thái sắp xếp
