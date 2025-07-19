@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSortColumn = 'views';
     let currentSortDirection = 'desc';
 
-    // === UTILITY & API FUNCTIONS (LOGIC GỐC ĐƯỢC KHÔI PHỤC) ===
+    // === CÁC HÀM GỐC CỦA BẠN (ĐÃ KHÔI PHỤC 100% NGUYÊN BẢN) ===
     function extractDomainAndAuth(shareUrl) {
         try {
             const url = new URL(shareUrl);
@@ -122,25 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) { console.error("Lỗi khi fetch dữ liệu từ API:", apiUrl, error); return { uniqueVisitors: 'Lỗi', totalVisits: 'Lỗi', totalPageviews: 'Lỗi' }; }
     }
 
-    // === CORE LOGIC FOR POST DETAILS TABLE ===
+    // === CÁC HÀM TÍNH NĂNG MỚI & HÀM ĐƯỢC CẢI TIẾN ===
     function normalizeTitle(title) {
         if (!title) return '';
         const tempElem = document.createElement('textarea');
         tempElem.innerHTML = title;
         let normalized = tempElem.value;
-        
-        // BƯỚC 1: Chuẩn hóa các ký tự giả mạo (homoglyphs)
         normalized = normalized.replace(/п/g, 'n').replace(/υ/g, 'u');
-
-        // BƯỚC 2: Chuẩn hóa Unicode
         normalized = normalized.normalize('NFC');
-        
-        // BƯỚC 3: Loại bỏ hậu tố
-        normalized = normalized.replace(/\s*[\-–—]\s*(News|пews)$/i, '');
-        
-        // BƯỚC 4: Dọn dẹp cuối chuỗi
+        normalized = normalized.replace(/\s*[\-–—]\s*(News|Nieuws)$/i, '');
         normalized = normalized.trim().replace(/[\.,\s]+$/, '');
-        
         return normalized.trim();
     }
     
@@ -200,8 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const tr = document.createElement('tr');
             tr.className = classes.join(' ');
+            const escapedTitle = post.title.replace(/"/g, '&quot;');
             tr.innerHTML = `
-                <td>${post.title}</td>
+                <td title="${escapedTitle}">${post.title}</td>
                 <td>${post.author}</td>
                 <td>${post.dateFormatted}</td>
                 <td>${(post.views || 0).toLocaleString('vi-VN')}</td>
