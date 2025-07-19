@@ -12,10 +12,9 @@
 
         <div class="controls">
             <div class="control-group">
-                <label for="searchText">Nội dung tìm kiếm:</label>
+                <label for="searchText">Nội dung / Tác giả:</label>
                 <input type="text" id="searchText" value="dk74" placeholder="Nhập text tìm kiếm">
             </div>
-
             <div class="control-group">
                 <label for="dateSelect">Chọn khoảng thời gian:</label>
                 <select id="dateSelect">
@@ -28,7 +27,6 @@
         </div>
 
         <div class="loading-spinner" id="loadingSpinner"></div>
-
         <div class="total-money-display">
             <label>Tổng tiền ước tính:</label>
             <span id="estimatedTotalMoney">0 VNĐ</span>
@@ -47,10 +45,8 @@
                         <th>Tổng tiền (page)</th>
                     </tr>
                 </thead>
-                <tbody id="statsTableBody">
-                </tbody>
-                <tfoot id="statsTableFoot">
-                </tfoot>
+                <tbody id="statsTableBody"></tbody>
+                <tfoot id="statsTableFoot"></tfoot>
             </table>
         </div>
 
@@ -59,38 +55,62 @@
             <div class="source-headers">
                 <span>Tên nguồn</span>
                 <span>URL nguồn (Plausible Share)</span>
-                </div>
-            <div id="sourceInputs">
             </div>
+            <div id="sourceInputs"></div>
             <button id="addSourceButton">Thêm nguồn</button>
         </div>
 
         <div class="post-details-section" id="postDetailsSection" style="display: none;">
             <h2>Chi Tiết Bài Viết</h2>
+            <div class="controls-extra">
+                <div class="toggle-control">
+                    <label for="viewDuplicateToggle" class="toggle-switch">
+                        <input type="checkbox" id="viewDuplicateToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Xem bài trùng lặp</span>
+                </div>
+                <div class="toggle-control">
+                    <label for="hideAuthorToggle" class="toggle-switch">
+                        <input type="checkbox" id="hideAuthorToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Ẩn bài của tác giả</span>
+                </div>
+                <div class="toggle-control">
+                    <label for="hideDuplicateToggle" class="toggle-switch">
+                        <input type="checkbox" id="hideDuplicateToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Ẩn bài trùng lặp</span>
+                </div>
+                <div class="toggle-control">
+                    <label for="hideAuthorSphereToggle" class="toggle-switch">
+                        <input type="checkbox" id="hideAuthorSphereToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span>Ẩn bài LQ tác giả</span>
+                </div>
+            </div>
+            
             <p id="postDetailsSourceTitle"></p>
             <div class="loading-spinner" id="postDetailsLoadingSpinner"></div>
             <div class="post-details-table">
                 <table id="postDetailsTable">
                     <thead>
                         <tr>
-                            <th>Tiêu đề</th>
+                            <th class="sortable" data-sort-key="title">Tiêu đề <span class="sort-icon"></span></th>
                             <th>Tác giả</th>
-                            <th class="sortable" data-sort-key="date">
-                                Ngày đăng <span class="sort-icon"></span>
-                            </th>
-                            <th class="sortable" data-sort-key="views">
-                                Lượt View <span class="sort-icon"></span>
-                            </th>
-                            <th>Link</th> </tr>
+                            <th class="sortable" data-sort-key="date">Ngày đăng <span class="sort-icon"></span></th>
+                            <th class="sortable" data-sort-key="views">Lượt View <span class="sort-icon"></span></th>
+                            <th>Link</th>
+                        </tr>
                     </thead>
-                    <tbody id="postDetailsTableBody">
-                    </tbody>
+                    <tbody id="postDetailsTableBody"></tbody>
                 </table>
             </div>
         </div>
-
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

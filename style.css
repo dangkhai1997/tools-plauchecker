@@ -1,33 +1,35 @@
 /* style.css */
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
     background-color: #f4f7f6;
     color: #333;
+    line-height: 1.5;
 }
 
 .container {
-    max-width: 1400px; /* Tăng độ rộng tối đa của web */
-    margin: 20px auto;
+    max-width: 1400px;
+    margin: 15px auto;
     background-color: #ffffff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 h1, h2 {
     color: #2c3e50;
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.4em; }
 
 .controls {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding: 15px;
     background-color: #ecf0f1;
     border-radius: 6px;
@@ -35,27 +37,16 @@ h1, h2 {
     align-items: flex-end;
 }
 
-.control-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.controls label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-.controls input[type="text"],
-.controls select {
+.control-group { display: flex; flex-direction: column; }
+.controls label { margin-bottom: 5px; font-weight: bold; color: #555; }
+.controls input[type="text"], .controls select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
-    width: 200px;
-    box-sizing: border-box; /* Ensures padding doesn't add to the width */
+    width: 220px;
+    box-sizing: border-box;
 }
-
 .controls button {
     padding: 10px 20px;
     background-color: #3498db;
@@ -66,10 +57,7 @@ h1, h2 {
     font-size: 1em;
     transition: background-color 0.2s ease;
 }
-
-.controls button:hover {
-    background-color: #2980b9;
-}
+.controls button:hover { background-color: #2980b9; }
 
 .loading-spinner {
     border: 4px solid #f3f3f3;
@@ -79,19 +67,15 @@ h1, h2 {
     height: 30px;
     animation: spin 1s linear infinite;
     margin: 20px auto;
-    display: none; /* Hidden by default */
+    display: none;
 }
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 .total-money-display {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding: 15px;
-    background-color: #e8f5e9; /* Light green for positive total */
+    background-color: #e8f5e9;
     border-radius: 6px;
     font-size: 1.2em;
     font-weight: bold;
@@ -100,432 +84,81 @@ h1, h2 {
     justify-content: center;
     align-items: baseline;
     gap: 10px;
-    flex-wrap: wrap; /* NEW: Cho phép xuống dòng trên màn hình nhỏ */
+    flex-wrap: wrap;
 }
-
-/* Updated: Style for the estimated total money amount (RED) */
 #estimatedTotalMoney {
     font-size: 1.8em;
-    color: #dc3545; /* NEW: Màu đỏ */
+    color: #dc3545;
     font-weight: bold;
-    white-space: nowrap;
 }
 
-
-.results-table,
-.post-details-table {
-    overflow-x: auto; /* Cho phép cuộn ngang nếu nội dung quá rộng */
-    margin-bottom: 30px;
-}
-
+.results-table, .post-details-table { overflow-x: auto; margin-bottom: 30px; }
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 15px;
     background-color: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden; /* Ensures rounded corners apply to content */
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-    color: #333;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9em;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-td a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-td a:hover {
-    text-decoration: underline;
-}
-
-tfoot td {
-    font-weight: bold;
-    background-color: #e0e0e0;
-    border-top: 2px solid #bbb;
-}
-
-/* --- Sorting styles --- */
-.sortable {
-    cursor: pointer;
-    position: relative;
-    padding-right: 25px; /* Tạo không gian cho icon */
-    white-space: nowrap; /* Giữ tiêu đề trên một dòng */
-}
-
-.sort-icon {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #aaa; /* Mũi tên lên mặc định (trạng thái ban đầu hoặc chưa được sort) */
-    opacity: 0.6; /* Mờ khi không được chọn */
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-/* Icon lên khi sắp xếp TĂNG DẦN */
-.sort-icon.sort-asc {
-    border-top: none;
-    border-bottom: 5px solid #333; /* Mũi tên lên */
-    opacity: 1; /* Rõ khi được chọn */
-}
-
-/* Icon xuống khi sắp xếp GIẢM DẦN */
-.sort-icon.sort-desc {
-    border-bottom: none;
-    border-top: 5px solid #333; /* Mũi tên xuống */
-    opacity: 1; /* Rõ khi được chọn */
-}
-
-.sortable:hover .sort-icon {
-    opacity: 0.8; /* Rõ hơn khi hover */
-}
-/* --- End Sorting styles --- */
-
-
-.source-config {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #ecf0f1;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.source-config h2 {
-    text-align: center;
-    margin-top: 0;
-    padding-top: 0;
-    margin-bottom: 15px;
-}
-
-/* Updated: Styles for the common headers for source inputs */
-.source-headers {
-    display: grid;
-    grid-template-columns: minmax(150px, 1.2fr) minmax(200px, 2fr) repeat(4, auto); /* 4 auto columns for buttons */
-    gap: 10px;
-    padding: 0 10px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #555;
-    align-items: center;
-}
-
-.source-headers span {
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+}
+th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+th { background-color: #f2f2f2; color: #333; font-weight: bold; }
+tr:nth-child(even) { background-color: #f9f9f9; }
+tr:not(.highlight-author):not(.highlight-duplicate):hover { background-color: #f1f1f1; }
+td a { color: #3498db; text-decoration: none; }
+td a:hover { text-decoration: underline; }
+tfoot td { font-weight: bold; background-color: #e0e0e0; border-top: 2px solid #bbb; }
+
+.sortable { cursor: pointer; position: relative; padding-right: 25px; white-space: nowrap; }
+.sort-icon { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); opacity: 0.6; }
+.sort-icon::before { content: '↕'; color: #aaa; }
+.sort-icon.sort-desc::before { content: '▼'; }
+.sort-icon.sort-asc::before { content: '▲'; }
+.sortable:hover .sort-icon { opacity: 0.8; }
+.sort-icon.sort-asc, .sort-icon.sort-desc { opacity: 1; }
+.sort-icon.sort-asc::before, .sort-icon.sort-desc::before { color: #333; }
+
+.source-config { margin-top: 30px; padding: 20px; background-color: #ecf0f1; border-radius: 8px; }
+.source-headers { display: grid; grid-template-columns: 1fr 2fr repeat(4, auto); gap: 10px; margin-bottom: 10px; font-weight: bold; }
+.source-input-group { display: grid; grid-template-columns: 1fr 2fr repeat(4, auto); gap: 10px; margin-bottom: 10px; align-items: center; }
+.source-input-group input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; box-sizing: border-box; }
+.source-input-group button, #addSourceButton { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9em; transition: background-color 0.2s; color: white; }
+.remove-source-button { background-color: #e74c3c; } .remove-source-button:hover { background-color: #c0392b; }
+.view-details-button { background-color: #2ecc71; } .view-details-button:hover { background-color: #27ae60; }
+.view-plau-button { background-color: #007bff; } .view-plau-button:hover { background-color: #0056b3; }
+.view-wp-button { background-color: #ff9800; } .view-wp-button:hover { background-color: #e68a00; }
+#addSourceButton { background-color: #3498db; font-size: 1em; padding: 10px 15px; } #addSourceButton:hover { background-color: #2980b9; }
+
+.post-details-section { margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; }
+.post-details-section h2 { text-align: left; }
+.controls-extra { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 15px; align-items: center;}
+.toggle-control { display: flex; align-items: center; gap: 8px; }
+.toggle-control span { font-weight: 500; font-size: 0.9em; }
+.toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+input:checked + .slider { background-color: #28a745; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+tr.highlight-author { background-color: #e0f7fa !important; }
+tr.highlight-duplicate { background-color: #fff176 !important; font-weight: bold; }
+tr.visually-hidden { display: none; }
+.open-link-button { padding: 6px 12px; font-size: 0.9em; background-color: #17a2b8; color: white !important; text-decoration: none; border-radius: 4px; transition: background-color 0.2s; }
+.open-link-button:hover { background-color: #138496; }
+
+@media (max-width: 992px) {
+    .source-headers, .source-input-group { grid-template-columns: 1fr 1fr; }
+    .source-input-group button { margin-top: 5px; }
 }
 
-
-.source-input-group {
-    display: grid;
-    grid-template-columns: minmax(150px, 1.2fr) minmax(200px, 2fr) repeat(4, auto); /* Match source-headers */
-    gap: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #cdd;
-    border-radius: 5px;
-    background-color: #fdfefe;
-    align-items: center;
-}
-
-.source-input-group input[type="text"] {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.source-input-group button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease;
-    white-space: nowrap;
-}
-
-.remove-source-button {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.remove-source-button:hover {
-    background-color: #c0392b;
-}
-
-.view-details-button {
-    background-color: #2ecc71;
-    color: white;
-}
-
-.view-details-button:hover {
-    background-color: #27ae60;
-}
-
-#addSourceButton {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    margin-top: 10px;
-}
-
-#addSourceButton:hover {
-    background-color: #2980b9;
-}
-
-.post-details-section {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #ecf0f1;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.post-details-section h2 {
-    text-align: left;
-}
-
-.view-plau-button {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease;
-}
-
-.view-plau-button:hover {
-    background-color: #0056b3;
-}
-
-.view-wp-button {
-    background-color: #ff9800;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.2s ease;
-}
-
-.view-wp-button:hover {
-    background-color: #e68a00;
-}
-
-/* Cải thiện style cho nút Open Link (bây giờ áp dụng cho thẻ <a>) */
-.open-link-button {
-    display: inline-block; /* Để có thể thiết lập padding, margin, width */
-    padding: 8px 12px; /* Tăng padding */
-    background-color: #28a745; /* Màu xanh lá cây đẹp hơn */
-    color: white;
-    border: none;
-    border-radius: 5px; /* Bo góc nhẹ */
-    cursor: pointer;
-    font-size: 0.9em; /* Kích thước font vừa phải */
-    font-weight: bold; /* Chữ đậm hơn */
-    text-align: center;
-    text-decoration: none; /* RẤT QUAN TRỌNG: Bỏ gạch chân mặc định của thẻ <a> */
-    transition: background-color 0.2s ease, transform 0.1s ease; /* Thêm hiệu ứng transform */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Thêm đổ bóng */
-    white-space: nowrap; /* Giữ nút trên một dòng */
-}
-
-.open-link-button:hover {
-    background-color: #218838; /* Màu xanh đậm hơn khi hover */
-    transform: translateY(-1px); /* Nâng nhẹ nút lên */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tăng đổ bóng khi hover */
-}
-
-.open-link-button:active {
-    transform: translateY(0); /* Nút lún xuống khi click */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Column widths for post-details-table to accommodate the new order and button */
-.post-details-table th:nth-child(1) { width: 35%; } /* Tiêu đề - tăng width */
-.post-details-table th:nth-child(2) { width: 15%; } /* Tác giả */
-.post-details-table th:nth-child(3) { width: 15%; } /* Ngày đăng */
-.post-details-table th:nth-child(4) { width: 10%; } /* Lượt View */
-.post-details-table th:nth-child(5) { width: 15%; } /* Link (nút) - đủ chỗ cho nút */
-
-
-/* Responsive adjustments for mobile devices */
 @media (max-width: 768px) {
-    body {
-        padding: 10px; /* Giảm padding tổng thể */
-    }
-
-    .container {
-        padding: 20px; /* Giảm padding container */
-        max-width: 100%; /* Đảm bảo full width trên di động */
-    }
-
-    h1, h2 {
-        font-size: 1.5em; /* Giảm kích thước tiêu đề */
-        margin-bottom: 15px;
-    }
-
-    .controls {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px; /* Giảm khoảng cách */
-    }
-
-    .control-group {
-        width: 100%;
-    }
-
-    .controls input[type="text"],
-    .controls select {
-        width: 100%;
-        font-size: 0.9em; /* Giảm kích thước font input/select */
-    }
-
-    .controls button {
-        width: 100%; /* Nút chiếm toàn bộ chiều rộng */
-        font-size: 0.9em;
-    }
-
-    .total-money-display {
-        font-size: 1em; /* Giảm kích thước font của label */
-        gap: 5px; /* Giảm khoảng cách */
-        padding: 10px;
-    }
-
-    #estimatedTotalMoney {
-        font-size: 1.5em; /* Giảm kích thước font của số tiền */
-        /* white-space: normal; Có thể cho phép xuống dòng nếu cần thiết */
-    }
-
-    /* Responsive cho source-headers và source-input-group */
-    .source-headers,
-    .source-input-group {
-        grid-template-columns: 1fr; /* Một cột duy nhất trên màn hình nhỏ */
-        gap: 5px; /* Giảm khoảng cách */
-        padding: 8px; /* Giảm padding */
-    }
-
-    .source-headers span {
-        width: 100%;
-        margin-bottom: 0;
-        text-align: left;
-        font-size: 0.9em; /* Giảm kích thước font header */
-    }
-
-
-    .source-input-group input[type="text"] {
-        width: 100%;
-        max-width: none;
-        min-width: unset;
-        font-size: 0.9em; /* Giảm kích thước font input */
-    }
-
-    .source-input-group button {
-        width: 100%; /* Các nút chiếm toàn bộ chiều rộng */
-        margin-left: 0;
-        margin-top: 5px;
-        font-size: 0.85em; /* Giảm kích thước font nút */
-    }
-
-    .results-table,
-    .post-details-table {
-        /* Đã có overflow-x: auto; nên bảng sẽ cuộn ngang nếu quá rộng */
-        /* Tuy nhiên, có thể cần điều chỉnh kích thước font trong bảng cho dễ đọc */
-        font-size: 0.85em;
-    }
-    table th, table td {
-        padding: 8px 10px; /* Giảm padding cho ô bảng */
-    }
-
-    /* Đảm bảo icon sort không bị tràn */
-    .sortable {
-        padding-right: 15px; /* Giảm khoảng trống cho icon trên màn hình nhỏ */
-    }
-    .sort-icon {
-        right: 2px; /* Điều chỉnh vị trí icon */
-    }
-
-    /* Điều chỉnh kích thước và font của nút Open Link trên điện thoại */
-    .open-link-button {
-        padding: 6px 10px;
-        font-size: 0.8em;
-    }
-
-    /* Đảm bảo các cột trong bảng chi tiết bài viết cũng responsive */
-    .post-details-table th:nth-child(1),
-    .post-details-table td:nth-child(1) {
-        width: 30%; /* Có thể giảm nhẹ chiều rộng tiêu đề trên mobile */
-    }
-    .post-details-table th:nth-child(2),
-    .post-details-table td:nth-child(2) {
-        width: 15%; /* Tác giả */
-    }
-    .post-details-table th:nth-child(3),
-    .post-details-table td:nth-child(3) {
-        width: 20%; /* Ngày đăng, cần đủ chỗ cho HH:MM DD/MM */
-    }
-    .post-details-table th:nth-child(4),
-    .post-details-table td:nth-child(4) {
-        width: 15%; /* Lượt View */
-    }
-    .post-details-table th:nth-child(5),
-    .post-details-table td:nth-child(5) {
-        width: 20%; /* Link (nút), cần đủ chỗ cho nút */
-    }
-}
-
-/* Responsive cho màn hình rất nhỏ (dưới 480px) */
-@media (max-width: 480px) {
-    body {
-        padding: 5px;
-    }
-    .container {
-        padding: 15px;
-    }
-    .post-details-table th,
-    .post-details-table td {
-        white-space: normal; /* Cho phép nội dung trong ô xuống dòng */
-    }
-    .post-details-table th:nth-child(1),
-    .post-details-table td:nth-child(1) {
-        max-width: 120px; /* Giới hạn chiều rộng của cột tiêu đề */
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+    body { padding: 5px; }
+    .container { padding: 10px; }
+    h1 { font-size: 1.5em; } h2 { font-size: 1.2em; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .controls input[type="text"], .controls select, .controls button { width: 100%; }
+    .source-headers { display: none; }
+    .source-input-group { grid-template-columns: 1fr; }
 }
