@@ -101,8 +101,15 @@ table {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
+    /* THAY ĐỔI: Bỏ table-layout fixed để cột tự co giãn theo nội dung */
+    table-layout: auto; 
 }
-th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+th, td { 
+    padding: 12px 15px; 
+    text-align: left; 
+    border-bottom: 1px solid #ddd; 
+    word-wrap: break-word;
+}
 th { background-color: #f2f2f2; color: #333; font-weight: bold; }
 tr:nth-child(even) { background-color: #f9f9f9; }
 tr:not(.highlight-author):not(.highlight-duplicate):hover { background-color: #f1f1f1; }
@@ -147,6 +154,33 @@ tr.highlight-duplicate { background-color: #fff176 !important; font-weight: bold
 tr.visually-hidden { display: none; }
 .open-link-button { padding: 6px 12px; font-size: 0.9em; background-color: #17a2b8; color: white !important; text-decoration: none; border-radius: 4px; transition: background-color 0.2s; }
 .open-link-button:hover { background-color: #138496; }
+
+
+/* === MÃ MỚI BẮT ĐẦU === */
+/* Style cho các cột phụ: tự co lại vừa đủ nội dung */
+.post-details-table th:nth-child(2),
+.post-details-table td:nth-child(2),
+.post-details-table th:nth-child(3),
+.post-details-table td:nth-child(3),
+.post-details-table th:nth-child(4),
+.post-details-table td:nth-child(4),
+.post-details-table th:nth-child(5),
+.post-details-table td:nth-child(5) {
+    width: 1%; /* Mẹo để cột co lại theo nội dung */
+    white-space: nowrap; /* Ngăn nội dung xuống dòng */
+}
+
+/* Style cho cột tiêu đề: chiếm hết phần còn lại và có "..." nếu quá dài */
+.post-details-table th:nth-child(1),
+.post-details-table td:nth-child(1) {
+    /* Không cần set width, nó sẽ tự chiếm phần còn lại */
+    max-width: 200px; /* Giới hạn độ rộng tối đa để không quá lớn */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* === MÃ MỚI KẾT THÚC === */
+
 
 @media (max-width: 992px) {
     .source-headers, .source-input-group { grid-template-columns: 1fr 1fr; }
