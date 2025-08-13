@@ -27,10 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
         { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lp7FUjx_PaevzNGUIBMJL" },
         { name: "Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
+        { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=_JJoHNQCV-gI1AQjhZrvr" },
         { name: "Nguồn thêm 1", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         { name: "Nguồn thêm 2", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
-
+        { name: "Nguồn thêm 3", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=BdFbYCjhTbqOEYN1H1Na5" },
     ];
+    
     let currentPostsData = [];
     let currentSortColumn = 'views';
     let currentSortDirection = 'desc';
