@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // === GLOBAL STATE & CONSTANTS ===
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=MohXt6WUVVnfnsWBM1NcT" },
+        { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=sxYAQ9j6tZYlUm_PD0HQT" },
         { name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=2CLwFmQPyrSeuZ0ZaHsJ-" },
         { name: "Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
         { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lp7FUjx_PaevzNGUIBMJL" },
         { name: "Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
-        { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=_JJoHNQCV-gI1AQjhZrvr" },
+        { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=UJTOgdBgaw9fR2Dq60MLm" },
         { name: "Nguồn thêm 1", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         { name: "Nguồn thêm 2", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
         { name: "Nguồn thêm 3", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=BdFbYCjhTbqOEYN1H1Na5" },
