@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=UJTOgdBgaw9fR2Dq60MLm" },
         { name: "Nguồn thêm 1", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         { name: "Nguồn thêm 2", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
-        { name: "Nguồn thêm 3", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=BdFbYCjhTbqOEYN1H1Na5" },
+        { name: "Nguồn thêm 3", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=rfruO0-YE0pvv7FgEfh3S" },
         { name: "Nguồn thêm 4", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
     ];
     
