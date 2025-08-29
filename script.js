@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let sourceUrls = [
         { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=sxYAQ9j6tZYlUm_PD0HQT" },
         { name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=2CLwFmQPyrSeuZ0ZaHsJ-" },
-        { name: "Bỉ", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
+        { name: "Bỉ", url: "https://plausible.io/share/nieuwsnl.azontree.com?f=contains,page,dk7482&auth=ddDxzYEYXF2HufjKEL2N0" },
         { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lp7FUjx_PaevzNGUIBMJL" },
         { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=04VPSRhzLd6z_Jy6NvCp5" },
         { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=UJTOgdBgaw9fR2Dq60MLm" },
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Nguồn thêm 2", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
         { name: "Nguồn thêm 3", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=rfruO0-YE0pvv7FgEfh3S" },
         { name: "Nguồn thêm 4", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
-        { name: "OLD - Bỉ", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
+        { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
+        { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
         { name: "OLD - Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
-
     ];
     
     let currentPostsData = [];
