@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=Jxd_fkOgY0Zs53BAcgrMK" },
         { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
-        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=rfruO0-YE0pvv7FgEfh3S" },
+        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
         { name: "Nguồn thêm", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
         { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
         { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
