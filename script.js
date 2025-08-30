@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // === GLOBAL STATE & CONSTANTS ===
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=sxYAQ9j6tZYlUm_PD0HQT" },
-        { name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=2CLwFmQPyrSeuZ0ZaHsJ-" },
-        { name: "Bỉ", url: "https://plausible.io/share/nieuwsnl.azontree.com?f=contains,page,dk7482&auth=ddDxzYEYXF2HufjKEL2N0" },
-        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lp7FUjx_PaevzNGUIBMJL" },
-        { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=04VPSRhzLd6z_Jy6NvCp5" },
-        { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=UJTOgdBgaw9fR2Dq60MLm" },
+        { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=huLCrirLNUjzSh7MOVij6" },
+        { name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=B-A6nXY_5JvRshBOOQZm1" },
+        { name: "Bỉ", url: "https://plausible.io/share/nieuwsnl.azontree.com?f=contains,page,dk7482&auth=W6d0O97rC9r3uBhDKeEDh" },
+        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lr1TnY9liMz8OwIYFAqSN" },
+        { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
+        { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=Jxd_fkOgY0Zs53BAcgrMK" },
         { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
         { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=rfruO0-YE0pvv7FgEfh3S" },
