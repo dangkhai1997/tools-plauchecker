@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lr1TnY9liMz8OwIYFAqSN" },
         { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
         { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=Jxd_fkOgY0Zs53BAcgrMK" },
-        { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
-        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
-        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
-        { name: "Nguồn thêm", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
-        { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
-        { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
-        { name: "OLD - Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
+        // { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
+        // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
+        // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
+        // { name: "Nguồn thêm", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
+        // { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
+        // { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
+        // { name: "OLD - Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
     ];
     
     let currentPostsData = [];
