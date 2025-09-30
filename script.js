@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // === GLOBAL STATE & CONSTANTS ===
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=huLCrirLNUjzSh7MOVij6" },
-        { name: "Seven", url: "https://plausible.io/share/noje.intelnestle.com?auth=QBLTjVZ-cslC9dPCcTgZt" },
+        { name: "Kadis+Stjernenytt", url: "https://plau.fusiondigest.com/share/nyheder.azontree.com?auth=XIWk-lIdCUZ9zI8vTG0yF" },
+        { name: "Seven", url: "https://plau.fusiondigest.com/share/noje.intelnestle.com?auth=MWvDDgNNfqjWkeQ1VFign" },
         //{ name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=B-A6nXY_5JvRshBOOQZm1" },
-        { name: "Bỉ", url: "https://plausible.io/share/nieuwsnl.azontree.com?f=contains,page,dk7482&auth=W6d0O97rC9r3uBhDKeEDh" },
-        { name: "Hà Lan", url: "https://plausible.io/share/nieuws.intelnestle.com?f=contains,page,dk74&auth=lr1TnY9liMz8OwIYFAqSN" },
+        { name: "Bỉ", url: "https://plau.fusiondigest.com/share/nieuwsnl.azontree.com?auth=ymW34gXvke_U2tuJ9EoNb" },
+        { name: "Hà Lan", url: "https://plau.fusiondigest.com/share/nieuws.intelnestle.com?auth=FP4cRAQPbLUutjy1VRGSl" },
         { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
-        { name: "Na Uy", url: "https://plausible.io/share/nyheter.intelnestle.com?auth=Jxd_fkOgY0Zs53BAcgrMK" },
+        { name: "Na Uy", url: "https://plau.fusiondigest.com/share/nyheter.intelnestle.com?auth=EHICxcB0DoNEcfiMKO7SK" },
         // { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
         // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (period === '7d') { periodParam = '7d'; } 
         else if (period === 'today') { periodParam = 'day'; }
         const filters = text ? encodeURIComponent(`[["contains","event:page",["${text}"]]]`) : '';
-        return `https://plausible.io/api/stats/${domain}/top-stats/?period=${periodParam}&date=${formattedDate}&filters=${filters}&with_imported=true&auth=${auth}`;
+        return `https://plau.fusiondigest.com/api/stats/${domain}/top-stats/?period=${periodParam}&date=${formattedDate}&filters=${filters}&with_imported=true&auth=${auth}`;
     }
 
     function getWordPressDateParams(period) {
