@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchPlausiblePageViews(domain, auth, period, dateRange) {
-        const apiUrl = `https://plausible.io/api/stats/${domain}/pages/?period=${period}&date=${dateRange}&with_imported=true&auth=${auth}&detailed=true&limit=1000`;
+        const apiUrl = `https://plau.fusiondigest.com/api/stats/${domain}/pages/?period=${period}&date=${dateRange}&with_imported=true&auth=${auth}&detailed=true&limit=1000`;
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
