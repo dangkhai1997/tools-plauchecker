@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //{ name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=B-A6nXY_5JvRshBOOQZm1" },
         { name: "Bỉ", url: "https://plau.fusiondigest.com/share/nieuwsnl.azontree.com?auth=ymW34gXvke_U2tuJ9EoNb" },
         { name: "Hà Lan", url: "https://plau.fusiondigest.com/share/nieuws.intelnestle.com?auth=FP4cRAQPbLUutjy1VRGSl" },
-        { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
+        // { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
         { name: "Na Uy", url: "https://plau.fusiondigest.com/share/nyheter.intelnestle.com?auth=EHICxcB0DoNEcfiMKO7SK" },
         // { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
