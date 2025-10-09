@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
         { name: "Kadis+Stjernenytt", url: "https://plau.fusiondigest.com/share/nyheder.azontree.com?auth=XIWk-lIdCUZ9zI8vTG0yF" },
-        { name: "Seven", url: "https://plau.fusiondigest.com/share/noje.intelnestle.com?auth=MWvDDgNNfqjWkeQ1VFign" },
+        { name: "Seven", url: "https://plau.fusiondigest.com/share/noje.azontree.com?auth=MWvDDgNNfqjWkeQ1VFign" },
         //{ name: "Seven", url: "https://plausible.io/share/noje.skyzenix.com?f=contains,page,dk74&auth=B-A6nXY_5JvRshBOOQZm1" },
         { name: "Bỉ", url: "https://plau.fusiondigest.com/share/nieuwsnl.azontree.com?auth=ymW34gXvke_U2tuJ9EoNb" },
         { name: "Hà Lan", url: "https://plau.fusiondigest.com/share/nieuws.intelnestle.com?auth=FP4cRAQPbLUutjy1VRGSl" },
