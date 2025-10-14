@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // === GLOBAL STATE & CONSTANTS ===
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Kadis+Stjernenytt", url: "https://plausible.io/share/nyheder.azontree.com?auth=GKJ0vGLwMlRcnuxRWKjDk"},
-       { name: "Seven", url: "https://plausible.io/share/noje.azontree.com?auth=63CzqCxe1SXVF9yrjWVzk" },
-       { name: "Bỉ", url: "https://plausible.io/share/nieuws.azontree.com?auth=aejnOQ_LdoN9m77VIiF0t" },
-       { name: "Hà Lan", url: "https://plausible.io/share/nieuwsnl.azontree.com?auth=Pvv7wK-RSxoM1CNrzg_O1" },
+        { name: "Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azontree.com?auth=uKP9PAu-GhH9Dvsl_UGYF"},
+       { name: "Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
+       { name: "Bỉ", url: "hhttps://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
+       { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
         // { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
-       { name: "Na Uy", url: "https://plausible.io/share/nyheterno.azontree.com?auth=tq1pD_DldqREzJStK9LF3" },
+       { name: "Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
         // { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
         // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
         // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (period === '7d') { periodParam = '7d'; } 
         else if (period === 'today') { periodParam = 'day'; }
         const filters = text ? encodeURIComponent(`[["contains","event:page",["${text}"]]]`) : '';
-        return `https://plausible.io/api/stats/${domain}/top-stats/?period=${periodParam}&date=${formattedDate}&filters=${filters}&with_imported=true&auth=${auth}`;
+        return `https://plau.azontree.com/api/stats/${domain}/top-stats/?period=${periodParam}&date=${formattedDate}&filters=${filters}&with_imported=true&auth=${auth}`;
     }
 
     function getWordPressDateParams(period) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchPlausiblePageViews(domain, auth, period, dateRange) {
-        const apiUrl = `https://plausible.io/api/stats/${domain}/pages/?period=${period}&date=${dateRange}&with_imported=true&auth=${auth}&detailed=true&limit=1000`;
+        const apiUrl = `https://plau.azontree.com/api/stats/${domain}/pages/?period=${period}&date=${dateRange}&with_imported=true&auth=${auth}&detailed=true&limit=1000`;
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
