@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const hideAuthorToggle = document.getElementById('hideAuthorToggle');
     const hideDuplicateToggle = document.getElementById('hideDuplicateToggle');
     const hideAuthorSphereToggle = document.getElementById('hideAuthorSphereToggle');
+    const toggleHiddenSources = document.getElementById('toggleHiddenSources');
+
 
     // === GLOBAL STATE & CONSTANTS ===
     const PRICE_PER_1000_VIEWS = 30000;
@@ -26,16 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
        { name: "Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
        { name: "Bỉ", url: "hhttps://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
        { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
-        // { name: "Đức", url: "https://plausible.io/share/nachrichten.azontree.com?f=contains,page,dk7482&auth=ZpnuE3J004DRDAzzI2sfa" },
        { name: "Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
-        // { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
-        // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
-        // { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
-        // { name: "Nguồn thêm", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
-        // { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
-        // { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
-        // { name: "OLD - Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
     ];
+
+    let sourceHidenUrls = [
+      
+        { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
+        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
+        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
+        { name: "Nguồn thêm", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
+        { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
+        { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
+        { name: "OLD - Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
+    ];
+
     
     let currentPostsData = [];
     let currentSortColumn = 'views';
@@ -356,6 +362,19 @@ document.addEventListener('DOMContentLoaded', () => {
         sourceUrls.push({ name: `Nguồn mới ${sourceUrls.length + 1}`, url: '' });
         renderSourceInputs();
     });
+
+    toggleHiddenSources.addEventListener('change', () => {
+        if (toggleHiddenSources.checked) {
+            sourceUrls = [...sourceUrls, ...sourceHidenUrls];
+        } else {
+            sourceUrls = sourceUrls.filter(
+                src => !sourceHidenUrls.some(h => h.url === src.url)
+            );
+        }
+        renderSourceInputs();
+        fetchAndDisplayData();
+    });
+    
     fetchDataButton.addEventListener('click', fetchAndDisplayData);
     dateSelect.addEventListener('change', fetchAndDisplayData);
 
