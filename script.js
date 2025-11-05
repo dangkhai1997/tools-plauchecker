@@ -33,13 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let sourceHidenUrls = [
       
-        { name: "OLD - Thuỵ Điển", url: "https://plausible.io/share/noje.intelnestle.com?f=contains,page,dk74&auth=llhUP5d5KPfkA1ASbAQZH" },
-        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/news.fusiondigest.com?f=contains,page,dk74&auth=J6mklWACwhMfhvPI1GP4u" },
-        { name: "OLD - Đan Mạch", url: "https://plausible.io/share/nyheder.intelnestle.com?f=contains,page,dk74&auth=0X1-Zp3yAlACX69Bvk9FL" },
-        { name: "Nguồn thêm", url: "https://plausible.io/share/nyheder.fusiondigest.com?f=contains,page,dk74&auth=LhjebF5m3UWrELLIdcskm" },
-        { name: "OLD - Bỉ 1", url: "https://plausible.io/share/sportnieuws.fusiondigest.com?f=contains,page,dk74&auth=JyiaexoZhZ_Q2sD25AjXM" },
-        { name: "OLD - Bỉ 2", url: "https://plausible.io/share/nieuws.znicely.com?f=contains,page,dk7482&auth=ViAFUxX05T6FgTRmhjBhc" },
-        { name: "OLD - Đức", url: "https://plausible.io/share/live.fusiondigest.com?f=contains,page,dk74&auth=4k7024CdKTt6rTAJGnH5e" },
+        { name: "OLD - Đan Mạch", url: "https://plau.azontree.com/share/nyhederdk.azontree.com?auth=DZS13IUdD1CqkW8RBLQ4K" },
     ];
 
     
