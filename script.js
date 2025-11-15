@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // === DOM REFERENCES ===
     const searchText = document.getElementById('searchText');
     const dateSelect = document.getElementById('dateSelect');
     const fetchDataButton = document.getElementById('fetchDataButton');
@@ -20,30 +19,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const hideAuthorSphereToggle = document.getElementById('hideAuthorSphereToggle');
     const toggleHiddenSources = document.getElementById('toggleHiddenSources');
 
-
-    // === GLOBAL STATE & CONSTANTS ===
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azontree.com?auth=uKP9PAu-GhH9Dvsl_UGYF"},
-       { name: "Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
-       { name: "Bỉ", url: "https://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
-       { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
-       { name: "Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
-       { name: "Ba Lan", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
+        { name: "Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azontree.com?auth=uKP9PAu-GhH9Dvsl_UGYF" },
+        { name: "Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
+        { name: "Bỉ", url: "https://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
+        { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
+        { name: "Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
+        { name: "Ba Lan", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
     ];
 
     let sourceHidenUrls = [
-      
         { name: "OLD - Đan Mạch", url: "https://plau.azontree.com/share/nyhederdk.azontree.com?auth=DZS13IUdD1CqkW8RBLQ4K" },
         { name: "Ba Lan 2", url: "https://plau.visaguidenow.com/share/noje.topnewsource.com?auth=aeIPd2eq15zLbkoNCVQ58" },
     ];
 
-    
     let currentPostsData = [];
     let currentSortColumn = 'views';
     let currentSortDirection = 'desc';
 
-    // === CÁC HÀM GỐC CỦA BẠN (ĐÃ KHÔI PHỤC 100% NGUYÊN BẢN) ===
     function extractDomainAndAuth(shareUrl) {
         try {
             const url = new URL(shareUrl);
@@ -51,25 +45,42 @@ document.addEventListener('DOMContentLoaded', () => {
             let domain = null;
             if (pathSegments.length > 2 && pathSegments[1] === 'share') {
                 domain = pathSegments[2];
-            } else { return null; }
+            } else {
+                return null;
+            }
             const authParam = url.searchParams.get('auth');
             const hostname = domain.split('?')[0] || url.hostname;
-            return { domain, auth: authParam, fullUrl: shareUrl, hostname: hostname };
-        } catch (e) { console.error("Invalid share URL:", shareUrl, e); return null; }
+
+            const plauseDomain = `${url.protocol}//${url.host}`;
+
+            return {
+                domain,
+                auth: authParam,
+                fullUrl: shareUrl,
+                hostname: hostname,
+                plauseDomain
+            };
+        } catch (e) {
+            console.error("Invalid share URL:", shareUrl, e);
+            return null;
+        }
     }
 
-    function buildPlausibleApiUrl(domain, auth, text, period) {
+    function buildPlausibleApiUrl(domain, auth, text, period, domainAndAuth) {
         const today = new Date();
         const year = today.getFullYear();
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
+
         let periodParam = '';
-        if (period === '28d') { periodParam = '28d'; } 
-        else if (period === '7d') { periodParam = '7d'; } 
-        else if (period === 'today') { periodParam = 'day'; }
+        if (period === '28d') periodParam = '28d';
+        else if (period === '7d') periodParam = '7d';
+        else if (period === 'today') periodParam = 'day';
+
         const filters = text ? encodeURIComponent(`[["contains","event:page",["${text}"]]]`) : '';
-        return `https://plau.azontree.com/api/stats/${domain}/top-stats/?period=${periodParam}&date=${formattedDate}&filters=${filters}&with_imported=true&auth=${auth}`;
+
+        return `${domainAndAuth.plauseDomain}/api/stats/${domain}/top-stats/?period=${periodParam}&date=${formattedDate}&filters=${filters}&with_imported=true&auth=${auth}`;
     }
 
     function getWordPressDateParams(period) {
@@ -77,15 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
         today.setHours(0, 0, 0, 0);
         let startDate = new Date(today);
         let endDate = new Date(today);
-        if (period === '7d') { startDate.setDate(today.getDate() - 6); } 
-        else if (period === '28d') { startDate.setDate(today.getDate() - 27); }
-        const formatToWPDate = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-        const afterDateString = formatToWPDate(startDate);
-        const beforeDateString = formatToWPDate(endDate);
+
+        if (period === '7d') startDate.setDate(today.getDate() - 6);
+        else if (period === '28d') startDate.setDate(today.getDate() - 27);
+
+        const formatToWPDate = (date) =>
+            `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
         return {
-            after: `${afterDateString}T00:00:00`,
-            before: `${beforeDateString}T23:59:59`,
-            plausibleDate: `${afterDateString}${period === 'today' ? '' : `,${beforeDateString}`}`,
+            after: `${formatToWPDate(startDate)}T00:00:00`,
+            before: `${formatToWPDate(endDate)}T23:59:59`,
+            plausibleDate: `${formatToWPDate(startDate)}${period === 'today' ? '' : `,${formatToWPDate(endDate)}`}`,
             plausiblePeriod: period === 'today' ? 'day' : (period === '7d' ? '7d' : '28d')
         };
     }
@@ -105,19 +118,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 link: post.link,
                 path: new URL(post.link).pathname
             }));
-        } catch (error) { console.error("Lỗi khi fetch bài viết từ WordPress:", baseUrl, error); return []; }
+        } catch (error) {
+            console.error("Lỗi khi fetch bài viết từ WordPress:", baseUrl, error);
+            return [];
+        }
     }
 
-    async function fetchPlausiblePageViews(domain, auth, period, dateRange) {
-        const apiUrl = `https://plau.azontree.com/api/stats/${domain}/pages/?period=${period}&date=${dateRange}&with_imported=true&auth=${auth}&detailed=true&limit=1000`;
+    async function fetchPlausiblePageViews(domain, auth, period, dateRange, domainAndAuth) {
+        const apiUrl = `${domainAndAuth.plauseDomain}/api/stats/${domain}/pages/?period=${period}&date=${dateRange}&with_imported=true&auth=${auth}&detailed=true&limit=1000`;
+
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             const data = await response.json();
             const pageViewsMap = new Map();
-            data.results.forEach(item => pageViewsMap.set(item.name, item.visitors));
+            (data.results ?? data).forEach(item => pageViewsMap.set(item.name, item.visitors));
             return pageViewsMap;
-        } catch (error) { console.error("Lỗi khi fetch page views từ Plausible:", apiUrl, error); return new Map(); }
+        } catch (error) {
+            console.error("Lỗi khi fetch page views từ Plausible:", apiUrl, error);
+            return new Map();
+        }
     }
 
     async function fetchStats(apiUrl) {
@@ -125,15 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             const data = await response.json();
+
             return {
                 uniqueVisitors: data.top_stats.find(stat => stat.name === 'Unique visitors')?.value || 0,
                 totalVisits: data.top_stats.find(stat => stat.name === 'Total visits')?.value || 0,
                 totalPageviews: data.top_stats.find(stat => stat.name === 'Total pageviews')?.value || 0,
             };
-        } catch (error) { console.error("Lỗi khi fetch dữ liệu từ API:", apiUrl, error); return { uniqueVisitors: 'Lỗi', totalVisits: 'Lỗi', totalPageviews: 'Lỗi' }; }
+        } catch (error) {
+            console.error("Lỗi khi fetch dữ liệu từ API:", apiUrl, error);
+            return { uniqueVisitors: 'Lỗi', totalVisits: 'Lỗi', totalPageviews: 'Lỗi' };
+        }
     }
 
-    // === CÁC HÀM TÍNH NĂNG MỚI & HÀM ĐƯỢC CẢI TIẾN ===
     function normalizeTitle(title) {
         if (!title) return '';
         const tempElem = document.createElement('textarea');
@@ -145,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         normalized = normalized.trim().replace(/[\.,\s]+$/, '');
         return normalized.trim();
     }
-    
+
     function renderPostDetailsTable(posts) {
         postDetailsTableBody.innerHTML = '';
         if (!posts || posts.length === 0) {
@@ -167,15 +190,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-        
+
         let duplicatePosts = new Set();
         const seenTitles = new Set();
         posts.forEach(post => {
             const normalizedTitle = normalizeTitle(post.title);
             if (!normalizedTitle) return;
             const isPostByAuthorGroup = authorNameToFind && post.author.trim().toLowerCase().includes(authorNameToFind);
-            const isTitleInAuthorGroup = authorTitles.has(normalizedTitle);
-            
+            const isTitleInAuthorGroup = authorTitles.has(normalizeTitle(post.title));
+
             if (!isPostByAuthorGroup && (isTitleInAuthorGroup || seenTitles.has(normalizedTitle))) {
                 duplicatePosts.add(post);
             }
@@ -183,18 +206,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 seenTitles.add(normalizedTitle);
             }
         });
-        
+
         const fragment = document.createDocumentFragment();
         posts.forEach(post => {
             const isPostByAuthorGroup = authorNameToFind && post.author.trim().toLowerCase().includes(authorNameToFind);
             const isTitleInAuthorGroup = authorTitles.has(normalizeTitle(post.title));
             const isPostDuplicate = duplicatePosts.has(post);
-            
+
             let classes = [];
             if (isHideAuthorSphereActive && isTitleInAuthorGroup) classes.push('visually-hidden');
             else if (isHideAuthorActive && isPostByAuthorGroup) classes.push('visually-hidden');
             else if (isHideDuplicateActive && isPostDuplicate) classes.push('visually-hidden');
-            
+
             if (!classes.includes('visually-hidden')) {
                 if (isPostByAuthorGroup) classes.push('highlight-author');
                 if (isDuplicateCheckActive && isPostDuplicate) classes.push('highlight-duplicate');
@@ -217,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function sortPosts(column, direction) {
         currentSortColumn = column;
         currentSortDirection = direction;
+
         currentPostsData.sort((a, b) => {
             if (column === 'title') {
                 const titleA = normalizeTitle(a.title).toLowerCase();
@@ -225,14 +249,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (titleA > titleB) return direction === 'asc' ? 1 : -1;
                 return (b.views || 0) - (a.views || 0);
             }
-            if (column === 'views') return direction === 'asc' ? (a.views || 0) - (b.views || 0) : (b.views || 0) - (a.views || 0);
-            if (column === 'date') return direction === 'asc' ? new Date(a.dateISO) - new Date(b.dateISO) : new Date(b.dateISO) - new Date(a.dateISO);
+            if (column === 'views')
+                return direction === 'asc' ? (a.views || 0) - (b.views || 0) : (b.views || 0) - (a.views || 0);
+
+            if (column === 'date')
+                return direction === 'asc' ? new Date(a.dateISO) - new Date(b.dateISO) : new Date(b.dateISO) - new Date(a.dateISO);
+
             return 0;
         });
+
         renderPostDetailsTable(currentPostsData);
         updateSortIcons();
     }
-    
+
     function updateSortIcons() {
         document.querySelectorAll('.sortable .sort-icon').forEach(icon => {
             icon.className = 'sort-icon';
@@ -246,22 +275,36 @@ document.addEventListener('DOMContentLoaded', () => {
         postDetailsSection.style.display = 'block';
         postDetailsSourceTitle.textContent = `Bài viết từ: ${sourceName} (${sourceHostname})`;
         postDetailsLoadingSpinner.style.display = 'block';
+
         const domainAndAuth = extractDomainAndAuth(sourceUrlFull);
         if (!domainAndAuth) {
             postDetailsTableBody.innerHTML = `<tr><td colspan="5">URL nguồn không hợp lệ.</td></tr>`;
             postDetailsLoadingSpinner.style.display = 'none';
             return;
         }
+
         const dateParams = getWordPressDateParams(dateSelect.value);
+
         const [posts, pageViewsMap] = await Promise.all([
             fetchWordPressPosts(sourceHostname),
-            fetchPlausiblePageViews(domainAndAuth.domain, domainAndAuth.auth, dateParams.plausiblePeriod, dateParams.plausibleDate)
+            fetchPlausiblePageViews(
+                domainAndAuth.domain,
+                domainAndAuth.auth,
+                dateParams.plausiblePeriod,
+                dateParams.plausibleDate,
+                domainAndAuth
+            )
         ]);
+
         postDetailsLoadingSpinner.style.display = 'none';
-        currentPostsData = posts.map(post => ({ ...post, views: pageViewsMap.get(post.path) || 0 }));
+        currentPostsData = posts.map(post => ({
+            ...post,
+            views: pageViewsMap.get(post.path) || 0
+        }));
+
         sortPosts(currentSortColumn, currentSortDirection);
     }
-    
+
     function renderSourceInputs() {
         sourceInputsContainer.innerHTML = sourceUrls.map((source, index) => `
             <div class="source-input-group">
@@ -271,7 +314,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="view-details-button" data-index="${index}">Xem chi tiết</button>
                 <button class="view-plau-button" data-index="${index}">View Plau</button>
                 <button class="view-wp-button" data-index="${index}">View WP</button>
-            </div>`).join('');
+            </div>
+        `).join('');
     }
 
     async function fetchAndDisplayData() {
@@ -280,80 +324,122 @@ document.addEventListener('DOMContentLoaded', () => {
         statsTableFoot.innerHTML = '';
         estimatedTotalMoney.textContent = 'Đang tính...';
         postDetailsSection.style.display = 'none';
+
         const textToFilter = searchText.value;
         const period = dateSelect.value;
+
         const allStats = await Promise.all(
             sourceUrls.map(async (source) => {
                 const domainAndAuth = extractDomainAndAuth(source.url);
-                if (!domainAndAuth) return { name: source.name, url: source.url, uniqueVisitors: 'Lỗi URL' };
-                const stats = await fetchStats(buildPlausibleApiUrl(domainAndAuth.domain, domainAndAuth.auth, textToFilter, period));
+                if (!domainAndAuth)
+                    return { name: source.name, url: source.url, uniqueVisitors: 'Lỗi URL' };
+
+                const stats = await fetchStats(
+                    buildPlausibleApiUrl(
+                        domainAndAuth.domain,
+                        domainAndAuth.auth,
+                        textToFilter,
+                        period,
+                        domainAndAuth
+                    )
+                );
+
                 return { name: source.name, url: source.url, ...stats };
             })
         );
+
         loadingSpinner.style.display = 'none';
+
         let grandTotalUV = 0, grandTotalVis = 0, grandTotalPV = 0;
+
         statsTableBody.innerHTML = allStats.map(stat => {
             const uv = typeof stat.uniqueVisitors === 'number' ? stat.uniqueVisitors : 0;
             const vis = typeof stat.totalVisits === 'number' ? stat.totalVisits : 0;
             const pv = typeof stat.totalPageviews === 'number' ? stat.totalPageviews : 0;
-            grandTotalUV += uv; grandTotalVis += vis; grandTotalPV += pv;
-            return `<tr>
-                <td>${stat.name}</td>
-                <td><a href="${stat.url}" target="_blank" rel="noopener noreferrer">${extractDomainAndAuth(stat.url)?.hostname || 'N/A'}</a></td>
-                <td>${uv.toLocaleString('vi-VN')}</td>
-                <td>${vis.toLocaleString('vi-VN')}</td>
-                <td>${pv.toLocaleString('vi-VN')}</td>
-                <td>${((uv / 1000) * PRICE_PER_1000_VIEWS).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
-            </tr>`;
+
+            grandTotalUV += uv;
+            grandTotalVis += vis;
+            grandTotalPV += pv;
+
+            return `
+                <tr>
+                    <td>${stat.name}</td>
+                    <td><a href="${stat.url}" target="_blank" rel="noopener noreferrer">${extractDomainAndAuth(stat.url)?.hostname || 'N/A'}</a></td>
+                    <td>${uv.toLocaleString('vi-VN')}</td>
+                    <td>${vis.toLocaleString('vi-VN')}</td>
+                    <td>${pv.toLocaleString('vi-VN')}</td>
+                    <td>${((uv / 1000) * PRICE_PER_1000_VIEWS).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                </tr>
+            `;
         }).join('');
-        statsTableFoot.innerHTML = `<tr>
-            <td colspan="2"><strong>Tổng cộng</strong></td>
-            <td><strong>${grandTotalUV.toLocaleString('vi-VN')}</strong></td>
-            <td><strong>${grandTotalVis.toLocaleString('vi-VN')}</strong></td>
-            <td><strong>${grandTotalPV.toLocaleString('vi-VN')}</strong></td>
-            <td><strong>${((grandTotalUV / 1000) * PRICE_PER_1000_VIEWS).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</strong></td>
-        </tr>`;
-        estimatedTotalMoney.textContent = ((grandTotalUV / 1000) * PRICE_PER_1000_VIEWS).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+
+        statsTableFoot.innerHTML = `
+            <tr>
+                <td colspan="2"><strong>Tổng cộng</strong></td>
+                <td><strong>${grandTotalUV.toLocaleString('vi-VN')}</strong></td>
+                <td><strong>${grandTotalVis.toLocaleString('vi-VN')}</strong></td>
+                <td><strong>${grandTotalPV.toLocaleString('vi-VN')}</strong></td>
+                <td><strong>${((grandTotalUV / 1000) * PRICE_PER_1000_VIEWS).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</strong></td>
+            </tr>
+        `;
+
+        estimatedTotalMoney.textContent =
+            ((grandTotalUV / 1000) * PRICE_PER_1000_VIEWS).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
 
-    // === EVENT LISTENERS ===
-    [viewDuplicateToggle, hideAuthorToggle, hideDuplicateToggle, hideAuthorSphereToggle].forEach(toggle => {
-        toggle.addEventListener('change', () => renderPostDetailsTable(currentPostsData));
-    });
+    [viewDuplicateToggle, hideAuthorToggle, hideDuplicateToggle, hideAuthorSphereToggle]
+        .forEach(toggle => toggle.addEventListener('change', () => renderPostDetailsTable(currentPostsData)));
+
     searchText.addEventListener('input', () => {
-        if (postDetailsSection.style.display === 'block') renderPostDetailsTable(currentPostsData);
+        if (postDetailsSection.style.display === 'block') {
+            renderPostDetailsTable(currentPostsData);
+        }
     });
+
     searchText.addEventListener('change', fetchAndDisplayData);
+
     postDetailsTable.addEventListener('click', (event) => {
         const target = event.target.closest('th.sortable');
         if (!target) return;
         const column = target.dataset.sortKey;
-        const direction = (column === currentSortColumn && currentSortDirection === 'desc') ? 'asc' : 'desc';
+        const direction =
+            (column === currentSortColumn && currentSortDirection === 'desc') ? 'asc' : 'desc';
+
         sortPosts(column, direction);
     });
+
     sourceInputsContainer.addEventListener('click', (e) => {
         const button = e.target.closest('button[data-index]');
         if (!button) return;
+
         const index = button.dataset.index;
         const source = sourceUrls[index];
-        const domainAndAuth = source.url ? extractDomainAndAuth(source.url) : null;
+        const domainAndAuth = extractDomainAndAuth(source.url);
+
         if (button.matches('.remove-source-button')) {
             sourceUrls.splice(index, 1);
             renderSourceInputs();
-        } else if (button.matches('.view-details-button') && domainAndAuth) {
+        }
+        else if (button.matches('.view-details-button') && domainAndAuth) {
             displayPostDetails(source.name, domainAndAuth.hostname, source.url);
-        } else if (button.matches('.view-plau-button') && source.url) {
+        }
+        else if (button.matches('.view-plau-button') && source.url) {
             window.open(source.url, '_blank');
-        } else if (button.matches('.view-wp-button') && domainAndAuth) {
+        }
+        else if (button.matches('.view-wp-button') && domainAndAuth) {
             window.open(`https://${domainAndAuth.hostname}/wp-admin`, '_blank');
         }
     });
+
     sourceInputsContainer.addEventListener('change', (e) => {
         const input = e.target;
         if (input.dataset.index) {
-            sourceUrls[input.dataset.index][input.classList.contains('source-name-input') ? 'name' : 'url'] = input.value;
+            sourceUrls[input.dataset.index][
+                input.classList.contains('source-name-input') ? 'name' : 'url'
+            ] = input.value;
         }
     });
+
     addSourceButton.addEventListener('click', () => {
         sourceUrls.push({ name: `Nguồn mới ${sourceUrls.length + 1}`, url: '' });
         renderSourceInputs();
@@ -363,18 +449,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (toggleHiddenSources.checked) {
             sourceUrls = [...sourceUrls, ...sourceHidenUrls];
         } else {
-            sourceUrls = sourceUrls.filter(
-                src => !sourceHidenUrls.some(h => h.url === src.url)
+            sourceUrls = sourceUrls.filter(src =>
+                !sourceHidenUrls.some(h => h.url === src.url)
             );
         }
         renderSourceInputs();
         fetchAndDisplayData();
     });
-    
+
     fetchDataButton.addEventListener('click', fetchAndDisplayData);
     dateSelect.addEventListener('change', fetchAndDisplayData);
 
-    // === INITIAL RUN ===
     renderSourceInputs();
     fetchAndDisplayData();
 });
