@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Bỉ", url: "https://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
         { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
         { name: "Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
-        { name: "Ba Lan", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
+        { name: "Ba Lan", url: "https://plau.azontree.com/share/nieuws.znicely.com?auth=4DpdXE6RCFWl4SjZwAAp9" },
+        { name: "Ba Lan - OLD", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
     ];
 
     let sourceHidenUrls = [
