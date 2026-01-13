@@ -21,18 +21,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azontree.com?auth=uKP9PAu-GhH9Dvsl_UGYF" },
-        { name: "Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
-        { name: "Bỉ", url: "https://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
-        { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
-        { name: "Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
+        { name: "Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azovona.com?auth=VcR_CLeIXwUX8vjMk5Xgf" },
+        { name: "Seven", url: "https://plau.azontree.com/share/noje.azovona.com?auth=3HvQYCmn5ER2R6gl-rNdY" },
+        { name: "Bỉ", url: "https://plau.azontree.com/share/vtmnieuws.azontree.com?auth=xDJWoICy8EYs2_aNT0RiJ" },
+        { name: "Hà Lan", url: "https://plau.azontree.com/share/nieuws.hakibava.com?auth=PSjsEwa2et4-hl-qGIxCn" },
+        { name: "Na Uy", url: "https://plau.azontree.com/share/tv2no.azontree.com?auth=Rc61NjZoFGCZdmI8U-R8K" },
         { name: "Ba Lan", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=bf78VRd_FYVFuEsj-GGzR" },
-        { name: "Ba Lan - OLD", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
     ];
 
     let sourceHidenUrls = [
         { name: "OLD - Đan Mạch", url: "https://plau.azontree.com/share/nyhederdk.azontree.com?auth=DZS13IUdD1CqkW8RBLQ4K" },
-        { name: "Ba Lan 2", url: "https://plau.visaguidenow.com/share/noje.topnewsource.com?auth=aeIPd2eq15zLbkoNCVQ58&period=day" },
+        { name: "OLD -Ba Lan 2", url: "https://plau.visaguidenow.com/share/noje.topnewsource.com?auth=aeIPd2eq15zLbkoNCVQ58&period=day" },
+        { name: "OLD -Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azontree.com?auth=uKP9PAu-GhH9Dvsl_UGYF" },
+        { name: "OLD -Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
+        { name: "OLD -Bỉ", url: "https://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
+        { name: "OLD -Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
+        { name: "OLD -Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
+        { name: "OLD -Ba Lan", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=bf78VRd_FYVFuEsj-GGzR" },
+        { name: "OLD -Ba Lan - OLD", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
     ];
 
     let currentPostsData = [];
