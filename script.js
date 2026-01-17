@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let sourceHidenUrls = [
-        { name: "OLD - Đan Mạch", url: "https://plau.visaguidenow.com/anews.travel2days.com?auth=Lks3VZgOKw0q07rTUUHQb&period=day" },
+        { name: "OLD - Đan Mạch", url: "https://plau.visaguidenow.com/share/anews.travel2days.com?auth=Lks3VZgOKw0q07rTUUHQb&period=day&zarsrc=30" },
         { name: "OLD - SVEN", url: "https://plau.visaguidenow.com/share/amazing.travel2days.com?auth=j-7LPzMbwPnen-5-YFT17&period=day" },
         { name: "OLD -Bỉ", url: "https://plau.visaguidenow.com/today.travel2days.com?auth=hwqf7zMBFCXHHETPvNJUu&period=day" },
         { name: "OLD -Hà Lan", url: "https://plau.visaguidenow.com/trendy.travel2days.com?auth=Rz4fgKPUcJ7WwaN3WW4uT&period=day" },
