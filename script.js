@@ -30,15 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let sourceHidenUrls = [
-        { name: "OLD - Đan Mạch", url: "https://plau.azontree.com/share/nyhederdk.azontree.com?auth=DZS13IUdD1CqkW8RBLQ4K" },
-        { name: "OLD -Ba Lan 2", url: "https://plau.visaguidenow.com/share/noje.topnewsource.com?auth=aeIPd2eq15zLbkoNCVQ58&period=day" },
-        { name: "OLD -Kadis+Stjernenytt", url: "https://plau.azontree.com/share/nyheder.azontree.com?auth=uKP9PAu-GhH9Dvsl_UGYF" },
-        { name: "OLD -Seven", url: "https://plau.azontree.com/share/noje.azontree.com?auth=Jd3JRsX0sxMpqg55TCtN-" },
-        { name: "OLD -Bỉ", url: "https://plau.azontree.com/share/nieuws.azontree.com?auth=J9-b1wtBpbQ_K79Uy7asO" },
-        { name: "OLD -Hà Lan", url: "https://plau.azontree.com/share/nieuwsnl.azontree.com?auth=zVRIGfqlAWqeEEasrszWM" },
-        { name: "OLD -Na Uy", url: "https://plau.azontree.com/share/nyheterno.azontree.com?auth=lf8Y0Gkjd6qjomlU7d4SF" },
-        { name: "OLD -Ba Lan", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=bf78VRd_FYVFuEsj-GGzR" },
-        { name: "OLD -Ba Lan - OLD", url: "https://plau.azontree.com/share/film.taigame.me?auth=mllPl9ouCNszgdpiRYgDq" },
+        { name: "OLD - Đan Mạch", url: "https://plau.visaguidenow.com/anews.travel2days.com?auth=Lks3VZgOKw0q07rTUUHQb&period=day" },
+        { name: "OLD - SVEN", url: "https://plau.visaguidenow.com/share/amazing.travel2days.com?auth=j-7LPzMbwPnen-5-YFT17&period=day" },
+        { name: "OLD -Bỉ", url: "https://plau.visaguidenow.com/today.travel2days.com?auth=hwqf7zMBFCXHHETPvNJUu&period=day" },
+        { name: "OLD -Hà Lan", url: "https://plau.visaguidenow.com/trendy.travel2days.com?auth=Rz4fgKPUcJ7WwaN3WW4uT&period=day" },
+        { name: "OLD -Na Uy", url: "https://plau.visaguidenow.com/share/daily.travel2days.com?auth=WYaJ9U13z69gDddX9II5E&period=day&date=2026-01-14" },
+        { name: "OLD -Ba Lan", url: "https://plau.visaguidenow.com/share/noje.topnewsource.com?auth=aeIPd2eq15zLbkoNCVQ58" },
     ];
 
     let currentPostsData = [];
