@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/nyheder.azovona.com?auth=VcR_CLeIXwUX8vjMk5Xgf" },
-        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/noje.azovona.com?auth=3HvQYCmn5ER2R6gl-rNdY" },
+        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.azontree.com?auth=axaC-0SEnybyCbxqSQcHe" },
+        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.azontree.com?auth=6bgzSSJwPgCSMV5tGvdgX" },
         { name: "Bỉ", url: "https://plau.azontree.com/share/vtmnieuws.azontree.com?auth=xDJWoICy8EYs2_aNT0RiJ" },
         { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/seiska.azontree.com?auth=tH2sVsK3rB8pgEEf6gWzN" },
         { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/tv2no.azontree.com?auth=Rc61NjZoFGCZdmI8U-R8K" },
