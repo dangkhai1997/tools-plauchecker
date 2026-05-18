@@ -21,21 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.azontree.com?auth=axaC-0SEnybyCbxqSQcHe" },
-        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.azontree.com?auth=6bgzSSJwPgCSMV5tGvdgX" },
-        { name: "Bỉ", url: "https://plau.azontree.com/share/vtmnieuws.azontree.com?auth=xDJWoICy8EYs2_aNT0RiJ" },
-        { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/seiska.azontree.com?auth=tH2sVsK3rB8pgEEf6gWzN" },
-        { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/tv2no.azontree.com?auth=Rc61NjZoFGCZdmI8U-R8K" },
-        { name: "Kanał Aktualności", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=bf78VRd_FYVFuEsj-GGzR" },
+        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.xinloc.com?auth=wPXfBcr92tZEDZi9smvkt" },
+        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.xinloc.com?auth=Wsljw5OyOCJRvZsdxGAnm" },
+        { name: "Bỉ", url: "https://plau.azontree.com/share/vtmnieuws.xinloc.com?auth=2ziAUx1CNNWy6a2nClhnP" },
+        { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/seiska.xinloc.com?auth=QNS12W-Dkx9z4WKH65syw" },
+        { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/tv2no.xinloc.com?auth=-PBXBEZGdm-vXjrB6zR5K" },
+        { name: "Kanał Aktualności", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=lgKQjDqwibIZadTtWz6WW" },
     ];
 
     let sourceHidenUrls = [
-        { name: "OLD - Đan Mạch", url: "https://plau.visaguidenow.com/share/anews.travel2days.com?auth=Lks3VZgOKw0q07rTUUHQb&period=day&zarsrc=30" },
         { name: "OLD - SVEN", url: "https://plau.visaguidenow.com/share/amazing.travel2days.com?auth=j-7LPzMbwPnen-5-YFT17&period=day" },
-        { name: "OLD -Bỉ", url: "https://plau.visaguidenow.com/today.travel2days.com?auth=hwqf7zMBFCXHHETPvNJUu&period=day" },
-        { name: "OLD -Hà Lan", url: "https://plau.visaguidenow.com/trendy.travel2days.com?auth=Rz4fgKPUcJ7WwaN3WW4uT&period=day" },
-        { name: "OLD -Na Uy", url: "https://plau.visaguidenow.com/share/daily.travel2days.com?auth=WYaJ9U13z69gDddX9II5E&period=day&date=2026-01-14" },
-        { name: "OLD -Ba Lan", url: "https://plau.visaguidenow.com/share/noje.topnewsource.com?auth=aeIPd2eq15zLbkoNCVQ58" },
     ];
 
     let currentPostsData = [];
