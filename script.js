@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.xinloc.com?auth=wPXfBcr92tZEDZi9smvkt" },
-        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.xinloc.com?auth=Wsljw5OyOCJRvZsdxGAnm" },
+        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.azoralive.com?auth=fEm-Qaru3O_0IYpO9YhFZ" },
+        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.azoralive.com?auth=DPJ_5MbOHDbxd2PDYq8PL" },
         { name: "Bỉ", url: "https://plau.azontree.com/share/vtmnieuws.xinloc.com?auth=2ziAUx1CNNWy6a2nClhnP" },
         { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/seiska.xinloc.com?auth=QNS12W-Dkx9z4WKH65syw" },
         { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/tv2no.xinloc.com?auth=-PBXBEZGdm-vXjrB6zR5K" },
@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(baseUrl);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             const data = await response.json();
+            console.log(data);
             return data.map(post => ({
                 title: post.title.rendered,
                 author: post._embedded?.author[0]?.name || 'Không rõ',
