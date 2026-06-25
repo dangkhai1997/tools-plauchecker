@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let sourceUrls = [
         { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.azoralive.com?auth=fEm-Qaru3O_0IYpO9YhFZ" },
         { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.azoralive.com?auth=DPJ_5MbOHDbxd2PDYq8PL" },
-        { name: "Bỉ", url: "https://plau.azontree.com/share/vtmnieuws.xinloc.com?auth=2ziAUx1CNNWy6a2nClhnP" },
-        { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/seiska.xinloc.com?auth=QNS12W-Dkx9z4WKH65syw" },
-        { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/tv2no.xinloc.com?auth=-PBXBEZGdm-vXjrB6zR5K" },
+        { name: "Bỉ", url: "https://plau.azontree.com/share/rtlnieuws.azoralive.com?auth=2ziAUx1CNNWy6a2nClhnP" },
+        { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/dailynews.azoralive.com?auth=QNS12W-Dkx9z4WKH65syw" },
+        { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/ciudad.azoralive.com?auth=-PBXBEZGdm-vXjrB6zR5K" },
         { name: "Kanał Aktualności", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=lgKQjDqwibIZadTtWz6WW" },
     ];
 
