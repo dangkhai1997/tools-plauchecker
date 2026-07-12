@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PRICE_PER_1000_VIEWS = 30000;
     let sourceUrls = [
-        { name: "Friske Nyheder", url: "https://plau.azontree.com/share/bladet.azoralive.com?auth=fEm-Qaru3O_0IYpO9YhFZ" },
-        { name: "Bakom Kulisserna", url: "https://plau.azontree.com/share/aftonbladet.azoralive.com?auth=DPJ_5MbOHDbxd2PDYq8PL" },
-        { name: "Bỉ", url: "https://plau.azontree.com/share/rtlnieuws.azoralive.com?auth=GcWlXfVqm00a8pFsdDnxt" },
-        { name: "Nopeat Uutiset", url: "https://plau.azontree.com/share/dailynews.azoralive.com?auth=wQzbrES7spb-rkbP_gFbV" },
-        { name: "Nyheter Rundt", url: "https://plau.azontree.com/share/ciudad.azoralive.com?auth=D6D9dQ0x2RmdmYuYo8fMw" },
-        { name: "Kanał Aktualności", url: "https://plau.azontree.com/share/film.fusiondigest.com?auth=lgKQjDqwibIZadTtWz6WW" },
+        { name: "Friske Nyheder", url: "https://plau.azoralive.com/share/bladet.azoralive.com?auth=fEm-Qaru3O_0IYpO9YhFZ" },
+        { name: "Bakom Kulisserna", url: "https://plau.azoralive.com/share/aftonbladet.azoralive.com?auth=DPJ_5MbOHDbxd2PDYq8PL" },
+        { name: "Bỉ", url: "https://plau.azoralive.com/share/rtlnieuws.azoralive.com?auth=GcWlXfVqm00a8pFsdDnxt" },
+        { name: "Nopeat Uutiset", url: "https://plau.azoralive.com/share/dailynews.azoralive.com?auth=wQzbrES7spb-rkbP_gFbV" },
+        { name: "Nyheter Rundt", url: "https://plau.azoralive.com/share/ciudad.azoralive.com?auth=D6D9dQ0x2RmdmYuYo8fMw" },
+        { name: "Kanał Aktualności", url: "https://plau.azoralive.com/share/film.fusiondigest.com?auth=lgKQjDqwibIZadTtWz6WW" },
     ];
 
     let sourceHidenUrls = [
